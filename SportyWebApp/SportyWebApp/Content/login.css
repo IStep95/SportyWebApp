@@ -1,0 +1,67 @@
+﻿
+body {
+    padding-top: 20px;
+}
+
+#logoTitle {
+    height:170px;
+    padding-left: 25%;
+}
+
+.formLabels {
+    text-align: end;
+    padding-right: 2%;
+    color: #0667d0;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.formInput {
+    width: 600px;
+}
+
+#tableForm {
+    margin-top: 1%;
+    height: 250px;
+    width: 700px;
+}
+
+.tableRows {
+    margin: 10%;
+}
+
+#loginButton {
+    color: #0667d0;
+    width: 100px;
+    font-family:sans-serif;
+    font-weight: bold;
+}
+
+#registerButton {
+    margin-left: 15%;
+    color: #0667d0;
+    width: 100px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+#divForm {
+    border: 5px solid #0667d0;
+    border-spacing: 50px;
+    padding-top: 2%;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-bottom: 2%;
+}
+
+.centered {
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 5%;
+
+}
+
+#errorMessage {
+    color: red;
+}
+

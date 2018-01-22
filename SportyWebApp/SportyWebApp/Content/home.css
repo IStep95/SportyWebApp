@@ -1,0 +1,25 @@
+﻿
+
+#homeTitle {
+    color: #0667d0;
+    font-family:'Open Sans';
+    font-weight: bold;
+}
+
+#homeMainDiv {
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 4%;
+}
+
+footer {
+    padding-left: 10%;
+}
+
+.sportCard {
+    background-color: #ffcc80;
+    padding: 2%;
+    margin-top: 2%;
+    height: 150px; 
+    
+}

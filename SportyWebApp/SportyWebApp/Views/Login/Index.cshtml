@@ -1,0 +1,54 @@
+﻿@using SportyWebApp.Models
+@model LoginViewModel
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/login.css" rel="stylesheet" type="text/css"/>
+    <title>Login</title>
+</head>
+<body>
+
+    <div id="divForm" class="centered">
+        <div>
+            <img src="~/Images/title.png" id="logoTitle" />
+        </div>
+        <div>
+            <form action = "@Url.Action("Submit", "Login")" method="post">
+                <table id="tableForm">    
+                    @if (Model.UserNotExist)
+                    {   
+                        <tr>
+                            <td></td>
+                            <td id="errorMessage">Uneseno korisničko ime ili lozinka je neispravno.</td>
+                        </tr>
+                    }                    
+                    <tr>
+                        <td class="formLabels">Korisničko ime:</td>
+                        <td><input type="text" class="formInput" name="username"/></td>
+                    </tr>
+                    <tr class="tableRows">
+                        <td class="formLabels">Lozinka:</td> 
+                        <td><input type="password" class="formInput" name="password"></td>
+                    </tr>
+                    <tr class="tableRows">
+                        <td></td>
+                        <td>
+                            <input type="submit" value="Prijava" id="loginButton">
+                            <input type="button" value="Registracija" onclick="location.href='@Url.Action("Index", "Register")'" id="registerButton">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>

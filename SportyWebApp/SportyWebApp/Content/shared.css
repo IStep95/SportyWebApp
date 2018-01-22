@@ -1,0 +1,25 @@
+﻿
+/*NOTE: A lot of design for Shared view is also in simpleSidebar.css because of dynamic sideBar*/
+
+#logoTitle {
+    height: 150px;
+}
+
+#navUl {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #0667d0;
+    height: 8px;
+}
+
+.navLi {
+    float:left;
+}
+
+footer {
+    font-family: 'Open Sans';
+    font-weight: bolder;
+}
+
