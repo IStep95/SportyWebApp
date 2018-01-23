@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SportyWebApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,8 +28,8 @@ namespace SportyWebApp.WebAPI
 
             if (response.IsSuccessStatusCode)
             {
-               var data = await response.Content.ReadAsStringAsync();
-               userViewModel  = Newtonsoft.Json.JsonConvert.DeserializeObject<UserViewModel>(data);
+                var data = await response.Content.ReadAsStringAsync();
+                userViewModel = JsonConvert.DeserializeObject<UserViewModel>(data);
             }
             return userViewModel;
         }
@@ -49,11 +51,31 @@ namespace SportyWebApp.WebAPI
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     var data = await response.Content.ReadAsStringAsync();
-                    userViewModel = Newtonsoft.Json.JsonConvert.DeserializeObject<UserViewModel>(data);
+                    userViewModel = JsonConvert.DeserializeObject<UserViewModel>(data);
                     return userViewModel;
                 }
             }
+
             return null;
+        }
+
+        public async Task<List<EventViewModel>> HttpGetTodayEventsByCityId(int id)
+        {
+            List<EventViewModel> todayEvents = new List<EventViewModel>();
+
+            _client.DefaultRequestHeaders.Clear();
+            DateTime date = DateTime.Now;
+            string dateString = date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+            string queryString = "?cityId=" + id + "&date=" + dateString;
+            HttpResponseMessage response = await _client.GetAsync("api/events/getbycity" + queryString);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadAsStringAsync();
+                todayEvents = JsonConvert.DeserializeObject<List<EventViewModel>>(data);
+
+            }
+            return todayEvents;
         }
     }
 }
