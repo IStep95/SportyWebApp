@@ -18,25 +18,19 @@ namespace SportyWebApp.Controllers
         public async Task<ActionResult> Index(UserViewModel userViewModel)
         {       
             _userViewModel = (UserViewModel) Session["UserViewModel"];
-
-            List<EventViewModel> todayEvents = await _api.HttpGetTodayEventsByCityId(_userViewModel.CityId);
-            
+            List<EventViewModel> todayEvents = await _api.HttpGetTodayEventsByCityId(_userViewModel.UserName);
+            foreach (var entry in todayEvents)
+            {
+                var sportName = entry.SportName;
+                if (!String.IsNullOrEmpty(sportName))
+                {
+                    sportName = sportName.First().ToString().ToUpper() + sportName.Substring(1);
+                    entry.SportName = sportName;
+                }
+            }  
             ViewBag.EventsToday = todayEvents;
+            ViewBag.CurrentPage = "HomePage";
             return View(_userViewModel);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }

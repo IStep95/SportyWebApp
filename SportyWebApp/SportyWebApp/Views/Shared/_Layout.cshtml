@@ -7,6 +7,7 @@
     @Styles.Render("~/Content/css")
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="~/Content/simpleSidebar.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/findEvent.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/shared.css" rel="stylesheet" type="text/css" />
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -20,11 +21,15 @@
                 <img src="~/Images/hamburgerMenuIcon.png" id="menu-toggle-image" />
             </button>
             <ul class="sidebar-nav">
-                <li>@Html.ActionLink("MOJI DOGAĐAJI", "MyEvents", "Event") </li>
-                <li>@Html.ActionLink("NOVI DOGAĐAJ", "Create", "Event") </li>
-                <li>@Html.ActionLink("TRAŽI DOGAĐAJE", "FindEvents", "Events")</li>
+                <li>@Html.ActionLink("MOJI DOGAĐAJI", "MyEvents", "Events") </li>
+                <li>@Html.ActionLink("NOVI DOGAĐAJ", "Create", "Events") </li>
+                <li>@Html.ActionLink("TRAŽI DOGAĐAJE", "Search", "Events")</li>
+                @if (ViewBag.CurrentPage != "HomePage")
+                {
+                  <li>@Html.ActionLink("DANAS U GRADU", "Index", "Home")</li>
+                }
                 <li>@Html.ActionLink("POSTAVKE PROFILA", "Index", "Profile")</li>
-                <li>@Html.ActionLink("ODJAVA", "Index", "Login")</li>
+                <li>@Html.ActionLink("ODJAVA", "Login", "User")</li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -50,12 +55,12 @@
     <!-- Menu Toggle Script -->
     <script>
         $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            console.log("bla");
             $("#menu-toggle").blur();
+            e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
     </script>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

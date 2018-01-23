@@ -16,7 +16,7 @@ namespace SportyWebApp
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "User", action = "Login", id = UrlParameter.Optional }
             );
         }
     }

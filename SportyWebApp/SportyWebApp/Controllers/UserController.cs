@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 using SportyWebApp.Models;
 using SportyWebApp.WebAPI;
 using System;
@@ -14,31 +14,48 @@ namespace SportyWebApp.Controllers
 {
     public class UserController : Controller
     {
-        private static readonly HttpClient client = new HttpClient();
-        API api = new API();
-
-        // GET: User
-        public ActionResult Index()
+        UserViewModel _userViewModel;
+        UserLoginModel _userLoginModel = new UserLoginModel();
+        UserRegisterModel _userRegisterModel = new UserRegisterModel();
+        // GET: User/Login
+        public ActionResult Login(UserLoginModel userLoginModel)
         {
-            return View();
+            Session.Abandon();
+            return View(userLoginModel);
         }
 
-        // GET: User/Details/5
-        public ActionResult Details(int id)
+        // POST: User/Submit
+        [HttpPost]
+        public async Task<ActionResult> Submit(string username, string password)
         {
-            return View();
+            API api = new API();
+            _userViewModel = await api.HttpGetUser(username, password);
+           
+            if (_userViewModel != null)
+            {
+                _userLoginModel.UserNotExist = false;
+                Session["UserViewModel"] = _userViewModel;
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                _userLoginModel.UserNotExist = true;
+                return RedirectToAction("Login", "User", _userLoginModel);
+            }
         }
-
-        // GET: User/Create
-        public ActionResult Create()
+        
+        // GET: User/Register
+        [HttpGet]
+        public async Task<ActionResult> Register()
         {
-            return View(new UserRegisterModel());
+            return await Create(_userRegisterModel);
         }
 
         // POST: User/Create
         [HttpPost]
         public async Task<ActionResult> Create([Bind(Include = "FirstName,LastName,Email,City,Password,UserName")] UserRegisterModel user)
         {
+			API api = new API();
             string response = await api.HttpCreateUser(user);
             if (response.Equals("OK"))
             {
@@ -51,50 +68,6 @@ namespace SportyWebApp.Controllers
                 ViewBag.poruka = response;
                 user.Password = "";
                 return View(user);
-            }
-        }
-
-        // GET: User/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: User/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: User/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: User/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
             }
         }
     }
