@@ -150,7 +150,7 @@
     </Compile>
     <Compile Include="Models\CityViewModel.cs" />
     <Compile Include="Models\EventViewModel.cs" />
-    <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\UserLoginModel.cs" />
     <Compile Include="Models\RatingViewModel.cs" />
     <Compile Include="Models\SportViewModel.cs" />
     <Compile Include="Models\Status.cs" />

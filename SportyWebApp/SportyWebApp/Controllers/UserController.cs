@@ -15,15 +15,15 @@ namespace SportyWebApp.Controllers
     public class UserController : Controller
     {
         UserViewModel _userViewModel;
-        LoginViewModel _loginViewModel = new LoginViewModel();
+        UserLoginModel _userLoginModel = new UserLoginModel();
         UserRegisterModel _userRegisterModel = new UserRegisterModel();
 
 
         // GET: User/Login
-        public ActionResult Login(LoginViewModel loginViewModel)
+        public ActionResult Login(UserLoginModel userLoginModel)
         {
             Session.Abandon();
-            return View(loginViewModel);
+            return View(userLoginModel);
         }
 
         // POST: User/Submit
@@ -35,14 +35,14 @@ namespace SportyWebApp.Controllers
            
             if (_userViewModel != null)
             {
-                _loginViewModel.UserNotExist = false;
+                _userLoginModel.UserNotExist = false;
                 Session["UserViewModel"] = _userViewModel;
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                _loginViewModel.UserNotExist = true;
-                return RedirectToAction("Login", "User", _loginViewModel);
+                _userLoginModel.UserNotExist = true;
+                return RedirectToAction("Login", "User", _userLoginModel);
             }
         }
         
