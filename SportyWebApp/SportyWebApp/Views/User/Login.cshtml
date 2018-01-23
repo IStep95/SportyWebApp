@@ -21,7 +21,7 @@
             <img src="~/Images/title.png" id="logoTitle" />
         </div>
         <div>
-            <form action = "@Url.Action("Submit", "Login")" method="post">
+            <form action = "@Url.Action("Submit", "User")" method="post">
                 <table id="tableForm">    
                     @if (Model.UserNotExist)
                     {   
@@ -42,7 +42,7 @@
                         <td></td>
                         <td>
                             <input type="submit" value="Prijava" id="loginButton">
-                            <input type="button" value="Registracija" onclick="location.href='@Url.Action("Create", "User")'" id="registerButton">
+                            <input type="button" value="Registracija" onclick="location.href='@Url.Action("Register", "User")'" id="registerButton">
                         </td>
                     </tr>
                 </table>

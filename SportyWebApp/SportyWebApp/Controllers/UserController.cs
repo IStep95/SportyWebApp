@@ -14,24 +14,43 @@ namespace SportyWebApp.Controllers
 {
     public class UserController : Controller
     {
-        private static readonly HttpClient client = new HttpClient();
+        UserViewModel _userViewModel;
+        LoginViewModel _loginViewModel = new LoginViewModel();
+        UserRegisterModel _userRegisterModel = new UserRegisterModel();
 
-        // GET: User
-        public ActionResult Index()
+
+        // GET: User/Login
+        public ActionResult Login(LoginViewModel loginViewModel)
         {
-            return View();
+            Session.Abandon();
+            return View(loginViewModel);
         }
 
-        // GET: User/Details/5
-        public ActionResult Details(int id)
+        // POST: User/Submit
+        [HttpPost]
+        public async Task<ActionResult> Submit(string username, string password)
         {
-            return View();
+            API api = new API();
+            _userViewModel = await api.HttpGetUser(username, password);
+           
+            if (_userViewModel != null)
+            {
+                _loginViewModel.UserNotExist = false;
+                Session["UserViewModel"] = _userViewModel;
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                _loginViewModel.UserNotExist = true;
+                return RedirectToAction("Login", "User", _loginViewModel);
+            }
         }
-
-        // GET: User/Create
-        public ActionResult Create()
+        
+        // GET: User/Register
+        [HttpGet]
+        public async Task<ActionResult> Register()
         {
-            return View(new UserRegisterModel());
+            return await Create(_userRegisterModel);
         }
 
         // POST: User/Create
@@ -49,50 +68,6 @@ namespace SportyWebApp.Controllers
                 ViewBag.poruka = response;
                 user.Password = "";
                 return View(user);
-            }
-        }
-
-        // GET: User/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: User/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: User/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: User/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
             }
         }
     }

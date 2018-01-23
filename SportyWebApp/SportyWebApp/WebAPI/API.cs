@@ -55,18 +55,17 @@ namespace SportyWebApp.WebAPI
                     return userViewModel;
                 }
             }
-
             return null;
         }
 
-        public async Task<List<EventViewModel>> HttpGetTodayEventsByCityId(int id)
+        public async Task<List<EventViewModel>> HttpGetTodayEventsByCityId(string username)
         {
             List<EventViewModel> todayEvents = new List<EventViewModel>();
 
             _client.DefaultRequestHeaders.Clear();
             DateTime date = DateTime.Now;
             string dateString = date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
-            string queryString = "?cityId=" + id + "&date=" + dateString;
+            string queryString = "?username=" + username + "&date=" + dateString;
             HttpResponseMessage response = await _client.GetAsync("api/events/getbycity" + queryString);
 
             if (response.IsSuccessStatusCode)
