@@ -1,6 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using SportyWebApp.Models;
+using SportyWebApp.WebAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -8,6 +14,8 @@ namespace SportyWebApp.Controllers
 {
     public class UserController : Controller
     {
+        private static readonly HttpClient client = new HttpClient();
+
         // GET: User
         public ActionResult Index()
         {
@@ -23,23 +31,26 @@ namespace SportyWebApp.Controllers
         // GET: User/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new UserRegisterModel());
         }
 
         // POST: User/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create([Bind(Include = "FirstName,LastName,Email,City,Password,UserName")] UserRegisterModel user)
         {
-            try
+            API api = new API();
+            string response = api.HttpCreateUser(user).ToString();
+            if (response.Equals("OK"))
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
-            catch
+            else
             {
-                return View();
+                ViewBag.poruka = response;
+                user.Password = "";
+                return View(user);
             }
+            return View();
         }
 
         // GET: User/Edit/5

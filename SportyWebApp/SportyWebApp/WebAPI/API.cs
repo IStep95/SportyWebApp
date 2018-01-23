@@ -26,8 +26,8 @@ namespace SportyWebApp.WebAPI
 
             if (response.IsSuccessStatusCode)
             {
-               var data = await response.Content.ReadAsStringAsync();
-               userViewModel  = Newtonsoft.Json.JsonConvert.DeserializeObject<UserViewModel>(data);
+                var data = await response.Content.ReadAsStringAsync();
+                userViewModel = Newtonsoft.Json.JsonConvert.DeserializeObject<UserViewModel>(data);
             }
             return userViewModel;
         }
@@ -54,6 +54,32 @@ namespace SportyWebApp.WebAPI
                 }
             }
             return null;
+        }
+
+        public async Task<string> HttpCreateUser(UserRegisterModel user)
+        {
+            JObject jsonObject = new JObject();
+            jsonObject.Add("UserName", user.UserName);
+            jsonObject.Add("Password", user.Password);
+            jsonObject.Add("FirstName", user.FirstName);
+            jsonObject.Add("LastName", user.LastName);
+            jsonObject.Add("Email", user.Email);
+            jsonObject.Add("CityName", user.City);
+
+            var content = new StringContent(jsonObject.ToString(), Encoding.UTF8, "application/json");
+
+
+            var response = await _client.PostAsync("/api/Users/Register", content);
+            if (response.IsSuccessStatusCode)
+            {
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return "OK";
+                }
+            }
+            string responseString = await response.Content.ReadAsStringAsync();
+            responseString = responseString.Substring(responseString.IndexOf(':') + 2, responseString.Length - responseString.IndexOf(':') - 4);
+            return responseString;
         }
     }
 }
