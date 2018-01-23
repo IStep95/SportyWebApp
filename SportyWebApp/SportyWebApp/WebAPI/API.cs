@@ -77,9 +77,8 @@ namespace SportyWebApp.WebAPI
                     return "OK";
                 }
             }
-            string responseString = await response.Content.ReadAsStringAsync();
-            responseString = responseString.Substring(responseString.IndexOf(':') + 2, responseString.Length - responseString.IndexOf(':') - 4);
-            return responseString;
+            JObject responseObject = JObject.Parse(await response.Content.ReadAsStringAsync());
+            return responseObject.GetValue("Message").ToString();
         }
     }
 }

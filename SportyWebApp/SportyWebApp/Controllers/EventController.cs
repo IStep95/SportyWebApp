@@ -1,64 +1,54 @@
-﻿using Newtonsoft.Json.Linq;
-using SportyWebApp.Models;
-using SportyWebApp.WebAPI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace SportyWebApp.Controllers
 {
-    public class UserController : Controller
+    public class EventController : Controller
     {
-        private static readonly HttpClient client = new HttpClient();
-
-        // GET: User
+        // GET: Event
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: User/Details/5
+        // GET: Event/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: User/Create
+        // GET: Event/Create
         public ActionResult Create()
         {
-            return View(new UserRegisterModel());
+            return View();
         }
 
-        // POST: User/Create
+        // POST: Event/Create
         [HttpPost]
-        public async Task<ActionResult> Create([Bind(Include = "FirstName,LastName,Email,City,Password,UserName")] UserRegisterModel user)
+        public ActionResult Create(FormCollection collection)
         {
-            API api = new API();
-            string response = await api.HttpCreateUser(user);
-            if (response.Equals("OK"))
+            try
             {
-                return RedirectToAction("Index", "Home");
+                // TODO: Add insert logic here
+
+                return RedirectToAction("Index");
             }
-            else
+            catch
             {
-                ViewBag.poruka = response;
-                user.Password = "";
-                return View(user);
+                return View();
             }
         }
 
-        // GET: User/Edit/5
+        // GET: Event/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: User/Edit/5
+        // POST: Event/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -74,13 +64,13 @@ namespace SportyWebApp.Controllers
             }
         }
 
-        // GET: User/Delete/5
+        // GET: Event/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: User/Delete/5
+        // POST: Event/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
