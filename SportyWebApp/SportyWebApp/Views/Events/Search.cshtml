@@ -1,0 +1,42 @@
+﻿
+<div id="findEventsMainDiv">
+    <h3 id="findEventTitle">Pretraga događaja:</h3>
+    <div class="findDiv">
+        <form method="get" action="@Url.Action("Search", "Events")">
+            <div class="one">
+                <label class="labels">Sport:</label>
+                <select id="sportSelect" name="sport">
+                    <!--TODO zamijeni sa svim sportovima iz baze-->
+                    <option value="1">Mali nogomet</option>
+                    <option value="2">Košarka</option>
+                    <option value="3">Tenis</option>
+                    <option value="4">Rukomet</option>
+                    <option value="5">Badminton</option>
+                </select>
+                <br />
+                <label class="labels">Datum:</label>
+                <input type="date" id="datePicker" name="date" />
+            </div>
+            <div class="two">
+                <label class="labels">Grad:</label>
+                <input type="text" id="cityInput" name="city" />
+                <br />
+                <label class="labels" id="freePlayersLabel">Broj slobodnih mjesta:</label>
+                <select id="freePlayers" name="freePlayers">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value=">5">5 i više</option>
+                </select>
+                <button class="buttons" id="searchButton" type="submit">TRAŽI</button>
+            </div>
+        </form>
+    </div>
+    <hr class="horizontalLine"/>
+    <div class="resultsDiv">
+    </div>
+</div>
+
+

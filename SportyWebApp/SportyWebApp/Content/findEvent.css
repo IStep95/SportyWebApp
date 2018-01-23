@@ -1,0 +1,182 @@
+﻿
+#findEventTitle {
+    color: #0667d0;
+    font-family: 'Open Sans';
+    font-weight: bolder;
+}
+
+#findEventsMainDiv {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.findDiv {
+    height: 180px;
+    margin-top: 2%;
+    margin-left: 0%;
+    margin-right: 10%;
+}
+
+.resultsDiv {
+    margin-top: 2%;
+    height: 500px
+}
+
+.one {
+    width: 40%;
+    height: 180px;
+    float: left;
+    text-align: right;
+}
+
+.two {
+    margin-left: 50%;
+    height: 180px;
+    text-align: right;
+}
+
+.horizontalLine {
+    margin-left: -30%;
+    margin-right: -10%;
+    border: none;
+    color: #0667d0;
+    border-top: dotted 2px;
+}
+
+select#sportSelect, select#soflow-color {
+    -webkit-appearance: button;
+    -webkit-border-radius: 2px;
+    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    -webkit-padding-start: 2px;
+    -webkit-user-select: none;
+    background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+    background-position: 97% center;
+    background-repeat: no-repeat;
+    border: 1px solid #AAA;
+    color: #555;
+    font-size: inherit;
+    margin: 20px;
+    margin-left: 10%;
+    margin-right: 0%;
+    overflow: hidden;
+    padding: 5px 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 250px;
+    border-radius: 5px;
+    font-family: 'Open Sans';
+}
+
+#datePicker {
+    -webkit-appearance: button;
+    -webkit-border-radius: 2px;
+    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    -webkit-padding-start: 2px;
+    -webkit-user-select: none;
+    background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+    background-position: 97% center;
+    background-repeat: no-repeat;
+    border: 1px solid #AAA;
+    color: #555;
+    font-size: inherit;
+    margin: 20px;
+    margin-left: 10%;
+    margin-right: 3px;
+    overflow: hidden;
+    padding: 5px 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 250px;
+    border-radius: 5px;
+    font-family: 'Open Sans';
+}
+
+#cityInput {
+    -webkit-appearance: button;
+    -webkit-border-radius: 2px;
+    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    -webkit-padding-start: 2px;
+    -webkit-user-select: none;
+    background-image: -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+    background-position: 97% center;
+    background-repeat: no-repeat;
+    border: 1px solid #AAA;
+    color: #555;
+    font-size: inherit;
+    margin: 20px;
+    margin-left: 10%;
+    margin-right: 0px;
+    overflow: hidden;
+    padding: 5px 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 250px;
+    border-radius: 5px;
+    font-family: 'Open Sans';
+}
+
+#freePlayers {
+    -webkit-appearance: button;
+    -webkit-border-radius: 2px;
+    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    -webkit-padding-start: 2px;
+    -webkit-user-select: none;
+    background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+    background-position: 97% center;
+    background-repeat: no-repeat;
+    border: 1px solid #AAA;
+    color: #555;
+    font-size: inherit;
+    margin: 20px;
+    margin-left: 10%;
+    margin-right: 203px;
+    overflow: hidden;
+    padding: 5px 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 50px;
+    border-radius: 5px;
+    font-family: 'Open Sans';
+}
+
+
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+::-webkit-calendar-picker-indicator {
+    display: block;
+}
+
+.labels {
+    color: #0667d0;
+    font-family: 'Open Sans';
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+
+#searchButton {
+    color: black;
+    background-color: #42ef6e;
+}
+
+.buttons {
+    width: 120px;
+    height: 32px;
+    font-family: 'Open Sans';
+    font-weight: bold;
+    border: 1px solid #49af25;
+    border-radius: 5px;
+}
+
+.buttons:focus {
+    outline: none;
+    border: 1px solid white;
+}
+
+
