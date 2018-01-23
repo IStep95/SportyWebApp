@@ -8,7 +8,7 @@
 
 .reg-input {
     width: 300px;
-    height: 25px;
+    height: 30px;
     -moz-border-radius: 10px;
     border-radius: 9px;
     border: solid 1px black;
@@ -47,5 +47,11 @@
 .reg-btn {
     width: 180px;
     background-color: lightsteelblue;
+    color: blue;
+}
+
+.event-register{
+    margin: auto;
+    padding-left: 25%;
     color: blue;
 }

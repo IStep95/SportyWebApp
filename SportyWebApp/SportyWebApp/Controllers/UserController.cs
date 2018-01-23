@@ -15,6 +15,7 @@ namespace SportyWebApp.Controllers
     public class UserController : Controller
     {
         private static readonly HttpClient client = new HttpClient();
+        API api = new API();
 
         // GET: User
         public ActionResult Index()
@@ -38,10 +39,11 @@ namespace SportyWebApp.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([Bind(Include = "FirstName,LastName,Email,City,Password,UserName")] UserRegisterModel user)
         {
-            API api = new API();
             string response = await api.HttpCreateUser(user);
             if (response.Equals("OK"))
             {
+                UserViewModel userViewModel = await api.HttpGetUser(user.UserName, user.Password);
+                Session["UserViewModel"] = userViewModel;
                 return RedirectToAction("Index", "Home");
             }
             else

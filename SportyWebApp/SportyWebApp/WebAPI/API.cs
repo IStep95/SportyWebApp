@@ -102,5 +102,42 @@ namespace SportyWebApp.WebAPI
             }
             return todayEvents;
         }
+
+        //public async Task<List<EventViewModel>> HttpGetEvents(string username)
+        //{
+        //    List<EventViewModel> lst = new List<EventViewModel>();
+        //    var response = await _client.GetAsync("api");
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        JObject responseObject = JObject.Parse(await response.Content.ReadAsStringAsync());
+        //    }
+        //    return lst;
+        //}
+
+        public async Task<string> HttpCreateEvent(EventCreateModel model)
+        {
+            UserViewModel _userViewModel = new UserViewModel();
+            JObject jsonObject = new JObject();
+            jsonObject.Add("SportId", model.SportId);
+            jsonObject.Add("City", model.City);
+            jsonObject.Add("UserName", model.UserName);
+            jsonObject.Add("MaxPlayers", model.MaxPlayers);
+            jsonObject.Add("FreePlayers", model.FreePlayers);
+            jsonObject.Add("StartTime", model.Date);
+            jsonObject.Add("Location", model.Location);
+
+            var content = new StringContent(jsonObject.ToString(), Encoding.UTF8, "application/json");
+
+
+            var response = await _client.PostAsync("/api/Events/Create", content);
+            if (response.IsSuccessStatusCode)
+            {
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return "OK";
+                }
+            }
+            return "Error";
+        }
     }
 }
