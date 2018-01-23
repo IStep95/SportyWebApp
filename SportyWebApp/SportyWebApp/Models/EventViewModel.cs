@@ -13,7 +13,8 @@ namespace SportyWebApp.Models
         public DateTime StartTime { get; set; }
         public string Location { get; set; }
         public CityViewModel City { get; set; }
-        public SportViewModel Sport { get; set; }
+        public int SportId { get; set; }
+        public string SportName { get; set; }
         public UserViewModel Creator { get; set; }
         public List<UserViewModel> Participants {get; set;}
 

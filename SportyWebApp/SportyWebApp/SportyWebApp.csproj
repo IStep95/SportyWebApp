@@ -172,7 +172,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\badmintonBall.png" />
+    <Content Include="Images\basketballBall.png" />
+    <Content Include="Images\footballBall.png" />
     <Content Include="Images\hamburgerMenuIcon.png" />
+    <Content Include="Images\handballBall.png" />
+    <Content Include="Images\tennisRacket.png" />
     <Content Include="Images\title.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

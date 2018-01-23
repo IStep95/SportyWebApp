@@ -16,10 +16,42 @@ footer {
     padding-left: 10%;
 }
 
+
+
+.sportBallIcon {
+    width: 115px;
+    height: 115px;
+    position: relative;
+    margin-top: 15%;
+    margin-left: 5%;
+}
+
 .sportCard {
     background-color: #ffcc80;
     padding: 2%;
     margin-top: 2%;
-    height: 150px; 
-    
+    height: 150px;
+}
+
+.iconDiv {
+    height: 150px;
+    margin-top: -2%;
+    float: left;
+}
+
+.descriptionDiv {
+    margin-left: 20%;
+    margin-top: -2%;
+    height: 150px;
+}
+
+#descriptionText {
+    white-space: pre-wrap;
+    color: white;
+    font-family: 'Open Sans';
+    font-size: 13pt;
+    position: absolute;
+    margin-top: 0%;
+    margin-bottom: 1%;
+    margin-left: -12%;
 }
