@@ -1,0 +1,114 @@
+﻿@model SportyWebApp.Models.UserRegisterModel
+@{ 
+    Layout = "";
+}
+<html style="" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms no-csstransforms3d csstransitions fontface no-generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/Content/bootstrap.css" rel="stylesheet">
+    <link href="/Content/site.css" rel="stylesheet">
+    <link href="/Content/register.css" rel="stylesheet">
+    <script src="/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body style="">
+    <div class="container body-content">
+        <fieldset id="field">
+            <h1>Registracija</h1>
+            <form action="/User/Create" method="post" novalidate="novalidate">
+                <div class="container">
+                    <div class="row col-lg-5 col-md-5 left-side">
+                        <div class="form-group">
+                            <label for="FirstName">Ime</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="LastName">Prezime</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="UserName">Korisničko ime</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="Email">Email</label>
+                        </div>
+                        @*<div class="form-group">
+                            <label for="PhoneNumber">Broj mobitela</label>
+                        </div>*@
+                        <div class="form-group">
+                            <label for="City">Grad</label>
+                        </div>
+                        @*<div class="form-group">
+                            <label for="Gender">Spol</label>
+                        </div>*@
+                        <div class="form-group">
+                            <label for="Password">Lozinka</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="ConfirmPassword">Ponovljena ozinka</label>
+                        </div>
+                        <div class="form-group">
+                            <a href="/Login/Index"><img style="color:blue" src="https://www.shareicon.net/download/2015/12/03/191855_back_256x256.png" alt="Povratak" height="40" width="40"></a>
+                        </div>
+                    </div>
+                    <div class="row col-lg-7 col-md-7 right-side">
+                        <div class="form-group">
+                            <input class="reg-input text-box single-line" data-val="true" data-val-required="Unesite ime!" id="FirstName" name="FirstName" type="text" value="@Model.FirstName">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="FirstName" data-valmsg-replace="true"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input class="reg-input text-box single-line" data-val="true" data-val-required="Unesite prezime!" id="LastName" name="LastName" type="text" value="@Model.LastName">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="LastName" data-valmsg-replace="true"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input class="reg-input text-box single-line" data-val="true" data-val-required="Unesite korisničko ime!" id="UserName" name="UserName" type="text" value="@Model.UserName">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="UserName" data-valmsg-replace="true"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input class="reg-input text-box single-line" data-val="true" data-val-email="Unesite ispravan email!" data-val-required="Unesite email!" id="Email" name="Email" type="email" value="@Model.Email">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                        </div>
+
+                        @*<div class="form-group">
+                            <input class="reg-input text-box single-line" data-val="true" data-val-required="Unesite broj mobitela!" id="PhoneNumber" name="PhoneNumber" type="text" value="">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="PhoneNumber" data-valmsg-replace="true"></span>
+                        </div>*@
+
+                        <div class="form-group">
+                            <input class="reg-input text-box single-line" data-val="true" data-val-required="Unesite grad!" id="City" name="City" type="text" value="@Model.City">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="City" data-valmsg-replace="true"></span>
+                        </div>
+
+                        @*<div class="form-group">
+                            <input class="gender-btn" data-val="true" data-val-required="Odaberite spol!" id="Gender" name="Gender" type="radio" value="male">  M
+                            <input class="gender-btn" id="Gender" name="Gender" type="radio" value="female"> Ž
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Gender" data-valmsg-replace="true"></span>
+                        </div>*@
+
+                        <div class="form-group">
+                            <input class="reg-input text-box single-line password" data-val="true" data-val-length="Lozinka mora imati najmanje 6 znakova!" data-val-length-max="255" data-val-length-min="6" data-val-required="Unesite lozinku!" id="Password" name="Password" type="password" value="">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input class="reg-input text-box single-line password" data-val="true" data-val-equalto="Lozinke se ne podudaraju!" data-val-equalto-other="*.Password" data-val-length="Lozinka mora imati najmanje 6 znakova!" data-val-length-max="255" data-val-length-min="6" data-val-required="Unesite lozinku opet!" id="ConfirmPassword" name="ConfirmPassword" type="password" value="">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="ConfirmPassword" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <span class="field-validation-valid text-danger">@ViewBag.poruka</span>
+                        </div>                        
+
+                        <div class="form-group">
+                            <input type="submit" value="Registracija" class="btn btn-default reg-btn">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </fieldset>
+    </div>
+</body>
+</html>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

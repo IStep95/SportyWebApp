@@ -77,5 +77,30 @@ namespace SportyWebApp.WebAPI
             }
             return todayEvents;
         }
+
+        public async Task<string> HttpCreateUser(UserRegisterModel user)
+        {
+            JObject jsonObject = new JObject();
+            jsonObject.Add("UserName", user.UserName);
+            jsonObject.Add("Password", user.Password);
+            jsonObject.Add("FirstName", user.FirstName);
+            jsonObject.Add("LastName", user.LastName);
+            jsonObject.Add("Email", user.Email);
+            jsonObject.Add("CityName", user.City);
+
+            var content = new StringContent(jsonObject.ToString(), Encoding.UTF8, "application/json");
+
+
+            var response = await _client.PostAsync("/api/Users/Register", content);
+            if (response.IsSuccessStatusCode)
+            {
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return "OK";
+                }
+            }
+            JObject responseObject = JObject.Parse(await response.Content.ReadAsStringAsync());
+            return responseObject.GetValue("Message").ToString();
+        }
     }
 }
