@@ -12,8 +12,6 @@ namespace SportyWebApp.Controllers
 {
     public class EventController : Controller
     {
-        API api = new API();
-
         // GET: Event
         //public async Task<ActionResult> MyEvents()
         //{
@@ -46,6 +44,7 @@ namespace SportyWebApp.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(EventCreateModel model)
         {
+            API api = new API();
             int hours=-1, minutes=-1;
             string[] time = model.Time.Split(':');
             if(!time[0].Equals("0") && !time[0].Equals("00"))
