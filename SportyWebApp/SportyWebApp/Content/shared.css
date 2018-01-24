@@ -2,7 +2,12 @@
 /*NOTE: A lot of design for Shared view is also in simpleSidebar.css because of dynamic sideBar*/
 
 #logoTitle {
-    height: 150px;
+    height: 120px;
+    font-family: 'Open Sans';
+    font-size: 80px;
+    font-weight: bolder;
+    margin-left: 30px;
+    color: #0667d0;;
 }
 
 #navUl {

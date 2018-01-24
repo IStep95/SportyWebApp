@@ -24,7 +24,7 @@ namespace SportyWebApp.WebAPI
         {
             UserViewModel userViewModel = new UserViewModel();
             _client.DefaultRequestHeaders.Clear();
-            HttpResponseMessage response = await _client.GetAsync("api/users/getbyid/" + id);
+            HttpResponseMessage response = await _client.GetAsync("api/Users/GetById/" + id);
 
             if (response.IsSuccessStatusCode)
             {
@@ -44,7 +44,7 @@ namespace SportyWebApp.WebAPI
             var content = new StringContent(jsonObject.ToString(), Encoding.UTF8, "application/json");
 
 
-            var response = await _client.PostAsync("/api/users/login", content);
+            var response = await _client.PostAsync("/api/Users/Login", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -58,7 +58,7 @@ namespace SportyWebApp.WebAPI
             return null;
         }
 
-        public async Task<List<EventViewModel>> HttpGetTodayEventsByCityId(string username)
+        public async Task<List<EventViewModel>> HttpGetTodayEvents(string username)
         {
             List<EventViewModel> todayEvents = new List<EventViewModel>();
 
@@ -66,7 +66,7 @@ namespace SportyWebApp.WebAPI
             DateTime date = DateTime.Now;
             string dateString = date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
             string queryString = "?username=" + username + "&date=" + dateString;
-            HttpResponseMessage response = await _client.GetAsync("api/events/getbycity" + queryString);
+            HttpResponseMessage response = await _client.GetAsync("api/Events/GetByCity" + queryString);
 
             if (response.IsSuccessStatusCode)
             {
@@ -101,5 +101,19 @@ namespace SportyWebApp.WebAPI
             JObject responseObject = JObject.Parse(await response.Content.ReadAsStringAsync());
             return responseObject.GetValue("Message").ToString();
         }
+        public async Task<List<SportViewModel>> HttpGetAllSports()
+        {
+            List<SportViewModel> allSports = new List<SportViewModel>();
+            _client.DefaultRequestHeaders.Clear();
+            HttpResponseMessage response = await _client.GetAsync("api/Events/GetAllSports");
+ 
+            if (response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadAsStringAsync();
+                allSports = JsonConvert.DeserializeObject<List<SportViewModel>>(data);      
+            }
+            return allSports;
+        }
+
     }
 }

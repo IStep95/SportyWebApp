@@ -8,6 +8,7 @@
 #findEventsMainDiv {
     padding-left: 5%;
     padding-right: 5%;
+    height: 1000px;
 }
 
 .findDiv {
@@ -19,7 +20,9 @@
 
 .resultsDiv {
     margin-top: 2%;
-    height: 500px
+    height: inherit; 
+    width:522px;
+    float: left;
 }
 
 .one {
@@ -34,6 +37,7 @@
     height: 180px;
     text-align: right;
 }
+
 
 .horizontalLine {
     margin-left: -30%;
@@ -179,4 +183,47 @@ input::-webkit-outer-spin-button {
     border: 1px solid white;
 }
 
+.sportBallIcon {
+    width: 115px;
+    height: 115px;
+    position: relative;
+    margin-top: 15%;
+    margin-left: 5%;
+}
 
+.sportCard {
+    background-color: #ffcc80;
+    padding: 2%;
+    margin-top: 2%;
+    width: 1000px;
+    height: 150px;
+    float: left;
+}
+
+.iconDiv {
+    height: 150px;
+    margin-top: -2%;
+    float: left;
+}
+
+.descriptionDiv {
+    margin-left: 20%;
+    margin-top: -2%;
+    height: 150px;
+}
+
+#descriptionText {
+    white-space: pre-wrap;
+    color: white;
+    font-family: 'Open Sans';
+    font-size: 13pt;
+    position: absolute;
+    margin-top: 0%;
+    margin-bottom: 1%;
+    margin-left: -12%;
+}
+
+footer {
+    padding-left: 10%;
+    position:absolute;
+}

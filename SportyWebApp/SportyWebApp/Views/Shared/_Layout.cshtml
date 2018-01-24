@@ -7,12 +7,14 @@
     @Styles.Render("~/Content/css")
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="~/Content/simpleSidebar.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/findEvent.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/search.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/shared.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/home.css" rel="stylesheet" type="text/css">
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <img src="~/Images/title.png" id="logoTitle" />
+    <h1 id="logoTitle">@ViewBag.MainTitle</h1>
+    @*<img src="~/Images/title.png" id="logoTitle" />*@
     <div><ul id="navUl"><li class="navLi"></li></ul></div>
     <div id="wrapper">
         <!-- Sidebar -->
@@ -38,12 +40,12 @@
                 <div class="row">
                     <div class="col-lg-12">
                         @RenderBody()
-                        <hr />
-                        <footer>
-                            <p>&copy; @DateTime.Now.Year - Sporty development</p>
-                        </footer>
                     </div>
                 </div>
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - Sporty development</p>
+                </footer>
             </div>
         </div>
     </div>
