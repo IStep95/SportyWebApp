@@ -23,7 +23,8 @@
                 <img src="~/Images/hamburgerMenuIcon.png" id="menu-toggle-image" />
             </button>
             <ul class="sidebar-nav">
-                <li>@Html.ActionLink("MOJI DOGAĐAJI", "MyEvent", "Events") </li>
+                <li>@Html.ActionLink("MOJI DOGAĐAJI", "FutureEvents", "Events") </li>
+                <li>@Html.ActionLink("NOVI DOGAĐAJ", "Create", "Events") </li>
                 <li>@Html.ActionLink("TRAŽI DOGAĐAJE", "Search", "Events")</li>
                 @if (ViewBag.CurrentPage != "HomePage")
                 {

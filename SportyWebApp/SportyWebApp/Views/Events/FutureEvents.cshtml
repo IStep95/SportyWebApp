@@ -1,0 +1,22 @@
+﻿@using SportyWebApp.Models
+@model UserViewModel
+
+<head>
+    <link href="~/Content/home.css" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div id="homeMainDiv">
+        <a href="/Events/PastEvents" class="btn btn-info">Prošli događaji</a>
+        <br /><br />
+        <h3 id="homeTitle">BUDUĆI DOGAĐAJI:</h3>
+        @foreach (EventListModel e in ViewBag.FutureEvents)
+        {
+
+            ViewBag.City = Model.CityName;
+            @Html.Partial("_Event", e)
+         }
+    </div>
+</body>
+

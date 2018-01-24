@@ -1,0 +1,38 @@
+﻿@model SportyWebApp.Models.EventListModel
+@{var filledSeats = Model.MaxPlayers - Model.FreePlayers; }
+<section class="sportCard">
+    <div class="iconDiv">
+        @if (Model.SportName == "Mali nogomet")
+        {
+            <img src="~/Images/footballBall.png" class="sportBallIcon" />
+        }
+        else if (Model.SportName == "nogomet")
+        {
+            <img src="~/Images/footballBall.png" class="sportBallIcon" />
+        }
+        else if (Model.SportName == "Rukomet")
+        {
+            <img src="~/Images/handballBall.png" class="sportBallIcon" />
+        }
+        else if (Model.SportName == "Košarka")
+        {
+            <img src="~/Images/basketballBall.png" class="sportBallIcon" />
+        }
+        else if (Model.SportName == "Badminton")
+        {
+            <img src="~/Images/badmintonBall.png" class="sportBallIcon" />
+        }
+        else if (Model.SportName == "Tenis")
+        {
+            <img src="~/Images/tennisRacket.png" class="sportBallIcon" />
+        }
+    </div>
+    <div class="descriptionDiv">
+        <label id="descriptionText" style="margin-left: 0%;">
+            @Model.SportName
+            @Model.Location, @ViewBag.City
+            Broj prijavljenih igrača: @filledSeats / @Model.MaxPlayers
+            @Model.StartTime
+        </label>
+    </div>
+</section>

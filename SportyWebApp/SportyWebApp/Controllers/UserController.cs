@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 using SportyWebApp.Models;
 using SportyWebApp.WebAPI;
 using System;
@@ -14,11 +14,10 @@ namespace SportyWebApp.Controllers
 {
     public class UserController : Controller
     {
+        API api = new API();
         UserViewModel _userViewModel;
         UserLoginModel _userLoginModel = new UserLoginModel();
         UserRegisterModel _userRegisterModel = new UserRegisterModel();
-
-
         // GET: User/Login
         public ActionResult Login(UserLoginModel userLoginModel)
         {
@@ -30,7 +29,6 @@ namespace SportyWebApp.Controllers
         [HttpPost]
         public async Task<ActionResult> Submit(string username, string password)
         {
-            API api = new API();
             _userViewModel = await api.HttpGetUser(username, password);
            
             if (_userViewModel != null)
@@ -57,10 +55,11 @@ namespace SportyWebApp.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([Bind(Include = "FirstName,LastName,Email,City,Password,UserName")] UserRegisterModel user)
         {
-            API api = new API();
             string response = await api.HttpCreateUser(user);
             if (response.Equals("OK"))
             {
+                UserViewModel userViewModel = await api.HttpGetUser(user.UserName, user.Password);
+                Session["UserViewModel"] = userViewModel;
                 return RedirectToAction("Index", "Home");
             }
             else
