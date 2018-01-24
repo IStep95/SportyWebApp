@@ -57,6 +57,7 @@ namespace SportyWebApp.Controllers
 
             List<EventListModel> events = await api.HttpGetEvents(username, time.ToLower());
             ViewBag.FutureEvents = events;
+            ViewBag.MainTitle = "Moji događaji";
             return View((UserViewModel)Session["UserViewModel"]);
         }
 
@@ -69,6 +70,7 @@ namespace SportyWebApp.Controllers
 
             List<EventListModel> events = await api.HttpGetEvents(username, time.ToLower());
             ViewBag.PastEvents = events;
+            ViewBag.MainTitle = "Moji događaji";
             return View((UserViewModel)Session["UserViewModel"]);
         }
 
@@ -79,16 +81,12 @@ namespace SportyWebApp.Controllers
         }
 
         // GET: Event/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            List<SportViewModel> lst = new List<SportViewModel>()
-            {
-                new SportViewModel() {Id=1, Name="Mali nogomet"},
-                new SportViewModel() {Id=2, Name="Košarka"},
-                new SportViewModel() {Id=3, Name="Odbojka"}
-            };
+            List<SportViewModel> lst = await api.HttpGetAllSports();
             EventCreateModel model = new EventCreateModel();
             model.lstSports = lst;
+            ViewBag.MainTitle = "Novi dagađaj";
             return View(model);
         }
 

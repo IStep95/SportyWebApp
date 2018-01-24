@@ -253,7 +253,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />
-    <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\Events\Create.cshtml" />
     <Content Include="Views\Events\Search.cshtml" />
     <Content Include="Views\Events\FutureEvents.cshtml" />
@@ -270,6 +269,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Shared\_Event.cshtml" />
     <Content Include="Views\Events\PastEvents.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
