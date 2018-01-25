@@ -29,17 +29,26 @@ body {
 
 #loginButton {
     color: #0667d0;
-    width: 100px;
-    font-family:sans-serif;
+    font-family: sans-serif;
     font-weight: bold;
+    width: 30%;
+    height: 40px;
+    float: left;
 }
 
 #registerButton {
-    margin-left: 15%;
+    margin-left: 60%;
     color: #0667d0;
-    width: 100px;
+    width: 110px;
+    height: 40px;
     font-family: sans-serif;
     font-weight: bold;
+}
+
+#buttonsDiv {
+    width: 60%;
+    height: 40px;
+    margin-bottom: 30px;
 }
 
 #divForm {

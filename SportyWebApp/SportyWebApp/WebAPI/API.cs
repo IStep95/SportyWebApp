@@ -84,10 +84,9 @@ namespace SportyWebApp.WebAPI
             return responseObject.GetValue("Message").ToString();
         }
 
-        public async Task<List<EventViewModel>> HttpGetTodayEvents(string username)
+        public async Task<List<EventListModel>> HttpGetTodayEvents(string username)
         {
-            List<EventViewModel> todayEvents = new List<EventViewModel>();
-
+            List<EventListModel> todayEvents = new List<EventListModel>();
             _client.DefaultRequestHeaders.Clear();
             DateTime date = DateTime.Now;
             string dateString = date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
@@ -97,7 +96,7 @@ namespace SportyWebApp.WebAPI
             if (response.IsSuccessStatusCode)
             {
                 var data = await response.Content.ReadAsStringAsync();
-                todayEvents = JsonConvert.DeserializeObject<List<EventViewModel>>(data);
+                todayEvents = JsonConvert.DeserializeObject<List<EventListModel>>(data);
 
             }
             return todayEvents;
@@ -199,9 +198,9 @@ namespace SportyWebApp.WebAPI
 	        return allSports;
 	    }
 
-	    public async Task<List<EventViewModel>> HttpFindEvents(string sportId, string date, string cityName, string freePlayers)
+	    public async Task<List<EventListModel>> HttpFindEvents(string sportId, string date, string cityName, string freePlayers)
 	    {
-	        List<EventViewModel> searchEvents = new List<EventViewModel>();
+	        List<EventListModel> searchEvents = new List<EventListModel>();
 	        _client.DefaultRequestHeaders.Clear();
 	        string queryString;
 	        DateTime dateAPIFormat;
@@ -219,7 +218,7 @@ namespace SportyWebApp.WebAPI
 	        if(response.IsSuccessStatusCode)
 	        {
 	            var data = await response.Content.ReadAsStringAsync();
-	            searchEvents = JsonConvert.DeserializeObject<List<EventViewModel>>(data);
+	            searchEvents = JsonConvert.DeserializeObject<List<EventListModel>>(data);
 	        }
 	        return searchEvents;
 	    }

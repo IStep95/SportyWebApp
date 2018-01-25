@@ -41,10 +41,13 @@
                     </tr>
                     <tr class="tableRows">
                         <td></td>
-                        <td>
-                            <input type="submit" value="Prijava" id="loginButton">
-                            <input type="button" value="Registracija" onclick="location.href='@Url.Action("Register", "User")'" id="registerButton">
+                        <td id="buttonsTd">
+                            <div id="buttonsDiv">
+                                <input type="submit" value="Prijava" id="loginButton" class="btn btn-block">
+                                <input type="button" value="Registracija" onclick="location.href='@Url.Action("Register", "User")'" id="registerButton" class="btn btn-block">
+                            </div>                            
                         </td>
+                        <td></td>
                     </tr>
                 </table>
             </form>
