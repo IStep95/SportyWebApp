@@ -1,4 +1,6 @@
 ﻿@{int sportId = 1; }
+@using SportyWebApp.Models
+
 <div id="findEventsMainDiv" style = "@ViewBag.FindMainDivHeight">
     <h3 id="findEventTitle">PRETRAGA DOGAĐAJA:</h3>
     <div class="findDiv">
@@ -42,49 +44,9 @@
     </div>
     <hr class="horizontalLine"/>
     <div id="resultsDivID" class="resultsDiv">
-        @foreach (var entry in @ViewBag.SearchEvents)
+        @foreach (EventListModel entry in @ViewBag.SearchEvents)
         {
-            var filledSeats = entry.MaxPlayers - entry.FreePlayers;
-            <section class="sportCard">
-                <div class="iconDiv">
-                    @if (entry.SportName == "Mali nogomet")
-                    {
-                        <img src="~/Images/footballBall.png" class="sportBallIcon" />
-                    }
-                    else if (entry.SportName == "Nogomet")
-                    {
-                        <img src="~/Images/footballBall.png" class="sportBallIcon" />
-                    }
-                    else if (entry.SportName == "Rukomet")
-                    {
-                        <img src="~/Images/handballBall.png" class="sportBallIcon" />
-                    }
-                    else if (entry.SportName == "Košarka")
-                    {
-                        <img src="~/Images/basketballBall.png" class="sportBallIcon" />
-                    }
-                    else if (entry.SportName == "Badminton")
-                    {
-                        <img src="~/Images/badmintonBall.png" class="sportBallIcon" />
-                    }
-                    else if (entry.SportName == "Tenis")
-                    {
-                        <img src="~/Images/tennisRacket.png" class="sportBallIcon" />
-                    }
-                </div>
-                <div class="descriptionDiv">
-                    <label id="descriptionText">
-                        @entry.SportName
-                        @entry.Location, @ViewBag.CityName
-                        Broj prijavljenih igrača: @filledSeats/@entry.MaxPlayers
-                        @entry.StartTime
-                    </label>
-                </div>
-                <div class="buttonsDiv">
-                    <button class="buttonCheckIn btn btn-info">PRIJAVA</button>
-                    <button class="buttonDetails btn btn-secondary">DETALJI</button>
-                </div>
-            </section>
+            @Html.Partial("_Event", entry)          
         }
     </div>
 </div>

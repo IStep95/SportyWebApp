@@ -15,18 +15,17 @@ namespace SportyWebApp.Controllers
 
         API api = new API();
         List<SportViewModel> allSports = new List<SportViewModel>();
-        List<EventViewModel> searchEvents = new List<EventViewModel>();
+        List<EventListModel> searchEvents = new List<EventListModel>();
 
         // GET: Search
         public async Task<ActionResult> Search(string sportId, string date, string cityName, string freePlayers)
-        {
-                       
+        {                      
             UserViewModel userViewModel = (UserViewModel) Session["UserViewModel"];
             if (userViewModel == null) return RedirectToAction("Login", "User");
 
             allSports = await api.HttpGetAllSports(); 
 
-            // First call
+            // First request
             if (sportId == null)
             {
                 ViewBag.CityEntered = true;
@@ -36,8 +35,8 @@ namespace SportyWebApp.Controllers
                 ViewBag.CurrentPage = "SearchEventPage";
                 return View();
             }
-
-            // TODO: Search events 
+            
+            // Search request
             if (cityName == "")
             {
                 ViewBag.CityEntered = false;
@@ -57,11 +56,6 @@ namespace SportyWebApp.Controllers
                 {
                     sportName = sportName.First().ToString().ToUpper() + sportName.Substring(1);
                     entry.SportName = sportName;
-                }
-                if (cityName != null)
-                {
-                    entry.City = new CityViewModel();
-                    entry.City.Name = cityName;
                 }
             }
 

@@ -49,17 +49,17 @@ footer {
 
 .buttonsDiv {
     margin-left: 75%;
-    margin-top: -2.5%;
+    margin-top: 0%;
     width: 200px;
     height: 150px;
 }
 
 .buttonCheckIn {
-    margin-top: 30%;
+    margin-top: 18%;
 }
 
 .buttonDetails {
-    margin-top: 30%;
+    margin-top: 18%;
     margin-left: 15%;
 }
 #descriptionText {
