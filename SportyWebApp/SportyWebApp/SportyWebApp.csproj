@@ -146,7 +146,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -155,11 +154,12 @@
     </Compile>
     <Compile Include="Models\CityViewModel.cs" />
     <Compile Include="Models\EventCreateModel.cs" />
+    <Compile Include="Models\EventDetailsModel.cs" />
     <Compile Include="Models\EventListModel.cs" />
     <Compile Include="Models\EventViewModel.cs" />
     <Compile Include="Models\RatingViewModel.cs" />
     <Compile Include="Models\SportViewModel.cs" />
-    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\UserEventModel.cs" />
     <Compile Include="Models\UserLoginModel.cs" />
     <Compile Include="Models\UserRegisterModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
@@ -173,6 +173,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\eventDetails.css" />
     <Content Include="Content\search.css" />
     <Content Include="Content\home.css" />
     <Content Include="Content\register.css" />
@@ -271,6 +272,7 @@
     <Content Include="Views\Events\PastEvents.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\Events\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -75,9 +75,42 @@ namespace SportyWebApp.Controllers
         }
 
         // GET: Event/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            EventDetailsModel model = await api.HttpGetEvent(id);
+            UserEventModel user1 = new UserEventModel();
+            user1.FirstName = "Ime";
+            user1.LastName = "Prezime";
+            user1.UserName = "Korisničko ime";
+            user1.Rating = 3;
+            UserEventModel user2 = new UserEventModel();
+            user2.FirstName = "Ime";
+            user2.LastName = "Prezime";
+            user2.UserName = "Korisničko ime";
+            user2.Rating = 3;
+            UserEventModel user3 = new UserEventModel();
+            user3.FirstName = "Ime";
+            user3.LastName = "Prezime";
+            user3.UserName = "Korisničko ime";
+            user3.Rating = 3;
+            UserEventModel user4 = new UserEventModel();
+            user4.FirstName = "Ime";
+            user4.LastName = "Prezime";
+            user4.UserName = "Korisničko ime";
+            user4.Rating = 3;
+            UserEventModel user5 = new UserEventModel();
+            user5.FirstName = "Ime";
+            user5.LastName = "Prezime";
+            user5.UserName = "Korisničko ime";
+            user5.Rating = 3;
+            model.lstUsers.Add(user1);
+            model.lstUsers.Add(user2);
+            model.lstUsers.Add(user3);
+            model.lstUsers.Add(user4);
+            model.lstUsers.Add(user5);
+            ViewBag.users = model.lstUsers;
+            ViewBag.MainTitle = "Pregled događaja";
+            return View(model);
         }
 
         // GET: Event/Create

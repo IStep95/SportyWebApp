@@ -1,4 +1,4 @@
-        using Newtonsoft.Json;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SportyWebApp.Models;
 using System;
@@ -102,7 +102,7 @@ namespace SportyWebApp.WebAPI
             }
             return todayEvents;
         }
-        
+
 
         public async Task<string> HttpCreateEvent(EventCreateModel model)
         {
@@ -127,50 +127,76 @@ namespace SportyWebApp.WebAPI
                     return "OK";
                 }
             }
-            return "Error";
+            JObject responseObject = JObject.Parse(await response.Content.ReadAsStringAsync());
+            return responseObject.GetValue("Message").ToString();
         }
 
-        public async Task<List<EventListModel>> HttpGetEvents(string username, string time)
+        public async Task<EventDetailsModel> HttpGetEvent(int id)
         {
-            List<EventListModel> lst = new List<EventListModel>();
-            var response = await _client.GetAsync("/api/Events/GetUserEvents" + "?username=" + username);
+            EventDetailsModel model = new EventDetailsModel();
+            List<UserEventModel> lst = new List<UserEventModel>();
+            var response = await _client.GetAsync("/api/Events/GetEvent" + "?id=" + id);
             if (response.IsSuccessStatusCode)
             {
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     string data = await response.Content.ReadAsStringAsync();
                     JObject obj = JObject.Parse(data);
-                    JToken events;
-                    if (time.Equals("futureevents"))
+                    JToken participants = obj.SelectToken("Participants");
+                    foreach (var user in participants)
                     {
-                         events = obj.SelectToken("FutureEvents");
+                        string json = JsonConvert.SerializeObject(user);
+                        lst.Add(JsonConvert.DeserializeObject<UserEventModel>(json));
                     }
-                    else
-                    {
-                         events = obj.SelectToken("PastEvents");
-                    }
-                    foreach (var item in events)
-                    {
-                        string json = JsonConvert.SerializeObject(item);
-                        lst.Add(JsonConvert.DeserializeObject<EventListModel>(json));
-                    }
+                    model = JsonConvert.DeserializeObject<EventDetailsModel>(data);
                 }
             }
-            return lst;
-        }
-        public async Task<List<SportViewModel>> HttpGetAllSports()
-        {
-            List<SportViewModel> allSports = new List<SportViewModel>();
-            _client.DefaultRequestHeaders.Clear();
-            HttpResponseMessage response = await _client.GetAsync("api/Events/GetAllSports");
- 
-            if (response.IsSuccessStatusCode)
-            {
-                var data = await response.Content.ReadAsStringAsync();
-                allSports = JsonConvert.DeserializeObject<List<SportViewModel>>(data);      
-            }
-            return allSports;
+            model.lstUsers = lst;
+            return model;
         }
 
+
+    public async Task<List<EventListModel>> HttpGetEvents(string username, string time)
+    {
+        List<EventListModel> lst = new List<EventListModel>();
+        var response = await _client.GetAsync("/api/Events/GetUserEvents" + "?username=" + username);
+        if (response.IsSuccessStatusCode)
+        {
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                string data = await response.Content.ReadAsStringAsync();
+                JObject obj = JObject.Parse(data);
+                JToken events;
+                if (time.Equals("futureevents"))
+                {
+                    events = obj.SelectToken("FutureEvents");
+                }
+                else
+                {
+                    events = obj.SelectToken("PastEvents");
+                }
+                foreach (var item in events)
+                {
+                    string json = JsonConvert.SerializeObject(item);
+                    lst.Add(JsonConvert.DeserializeObject<EventListModel>(json));
+                }
+            }
+        }
+        return lst;
     }
+    public async Task<List<SportViewModel>> HttpGetAllSports()
+    {
+        List<SportViewModel> allSports = new List<SportViewModel>();
+        _client.DefaultRequestHeaders.Clear();
+        HttpResponseMessage response = await _client.GetAsync("api/Events/GetAllSports");
+
+        if (response.IsSuccessStatusCode)
+        {
+            var data = await response.Content.ReadAsStringAsync();
+            allSports = JsonConvert.DeserializeObject<List<SportViewModel>>(data);
+        }
+        return allSports;
+    }
+
+}
 }
