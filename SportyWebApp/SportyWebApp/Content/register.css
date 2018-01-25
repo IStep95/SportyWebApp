@@ -6,6 +6,10 @@
     margin-top: 10%;
 }
 
+.fix{
+    height: 35px !important;
+}
+
 .reg-input {
     width: 300px;
     height: 30px;

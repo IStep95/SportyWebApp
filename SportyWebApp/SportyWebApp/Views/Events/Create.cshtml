@@ -21,7 +21,7 @@
                     <div class="form-group">
                         @Html.Label("Sport", htmlAttributes: new { @class = "eventLabels" })
                         <div class="col-md-10">
-                            @Html.DropDownListFor(m => m.SportId, new SelectList(Model.lstSports, "Id", "Name"), new { @class = "reg-input" })
+                            @Html.DropDownListFor(m => m.SportId, new SelectList(Model.lstSports, "Id", "Name"), new { @class = "reg-input fix" })
                         </div>
                     </div>
 

@@ -11,3 +11,11 @@
     font-family: sans-serif;
     font-weight: bold;
 }
+
+.rating {
+    transition: transform 200ms ease-in-out;
+}
+
+    .rating:hover {
+        transform: scale(1.5);
+    }

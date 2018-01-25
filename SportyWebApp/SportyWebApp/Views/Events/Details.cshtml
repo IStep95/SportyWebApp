@@ -2,13 +2,10 @@
 @model SportyWebApp.Models.EventDetailsModel
 
 @{
-    ViewBag.Title = "Details";
     int x = Model.MaxPlayers - Model.FreePlayers;
-    Model.CityName = "Zagreb";
-    Model.Location = "Jarun";
-    Model.SportName = "Rukomet";
 }
 <link href="~/Content/eventDetails.css" rel="stylesheet" />
+
 <div>
     <div class="iconDiv" style="margin-right: 40px;">
         @if (Model.SportName == "Mali nogomet")
@@ -43,7 +40,7 @@
         </div>
         <div class="eventData">
             Broj prijavljenih igrača: @x/@Model.MaxPlayers
-        </div >
+        </div>
         <div class="eventData">
             Datum: @Model.StartTime.ToShortDateString()
         </div>
@@ -54,13 +51,23 @@
 </div>
 <hr />
 <div>
-    @for (int i = 0; i < Enumerable.Count(ViewBag.users); i+=2)
+    @for (int i = 0; i < Enumerable.Count(ViewBag.users); i += 2)
     {
         <div class="container" style="padding-left: 25%; margin-bottom: 20px;">
+            @if (ViewBag.isPlayer)
+            {
+                <section class="container">
+                    <input type="radio" name="example" class="rating" value="1" />
+                    <input type="radio" name="example" class="rating" value="2" />
+                    <input type="radio" name="example" class="rating" value="3" />
+                    <input type="radio" name="example" class="rating" value="4" />
+                    <input type="radio" name="example" class="rating" value="5" />
+                </section>
+            }
             <div class="row col-lg-6" style="float:left;">
                 <div class="container">
                     <div class="row col-lg-1">
-                        <img src="https://cdn3.iconfinder.com/data/icons/gray-toolbar-3/512/user-512.png" />
+                        <a href=""><img src="https://cdn3.iconfinder.com/data/icons/gray-toolbar-3/512/user-512.png" /></a>
                     </div>
                     <div class="row col-lg-11">
                         <table>
@@ -87,8 +94,18 @@
             {
                 <div class="row col-lg-6">
                     <div class="container">
+                        @if (ViewBag.isPlayer)
+                        {
+                            <section class="container">
+                                <input type="radio" name="example" class="rating" value="1" />
+                                <input type="radio" name="example" class="rating" value="2" />
+                                <input type="radio" name="example" class="rating" value="3" />
+                                <input type="radio" name="example" class="rating" value="4" />
+                                <input type="radio" name="example" class="rating" value="5" />
+                            </section>
+                        }
                         <div class="row col-lg-1">
-                            <img src="https://cdn3.iconfinder.com/data/icons/gray-toolbar-3/512/user-512.png" />
+                            <a href=""><img src="https://cdn3.iconfinder.com/data/icons/gray-toolbar-3/512/user-512.png" /></a>
                         </div>
                         <div class="row col-lg-11">
                             <table>
