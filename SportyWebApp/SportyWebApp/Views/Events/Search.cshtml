@@ -1,6 +1,6 @@
 ﻿@{int sportId = 1; }
-<div id="findEventsMainDiv">
-    <h3 id="findEventTitle">Pretraga događaja:</h3>
+<div id="findEventsMainDiv" style = "@ViewBag.FindMainDivHeight">
+    <h3 id="findEventTitle">PRETRAGA DOGAĐAJA:</h3>
     <div class="findDiv">
         <form method="get" action="@Url.Action("Search", "Events")">
             <div class="one">
@@ -18,7 +18,14 @@
             </div>
             <div class="two">
                 <label class="labels">Grad:</label>
-                <input type="text" id="cityInput" name="cityName" />
+                @if (ViewBag.CityEntered == false)
+                {
+                    <input type="text" id="cityInput" name="cityName" placeholder="Grad je obavezan za pretragu." />
+                }
+                else
+                {
+                    <input type="text" id="cityInput" name="cityName" />
+                }
                 <br />
                 <label class="labels" id="freePlayersLabel">Broj slobodnih mjesta:</label>
                 <select id="freePlayers" name="freePlayers">
@@ -34,7 +41,7 @@
         </form>
     </div>
     <hr class="horizontalLine"/>
-    <div class="resultsDiv">
+    <div id="resultsDivID" class="resultsDiv">
         @foreach (var entry in @ViewBag.SearchEvents)
         {
             var filledSeats = entry.MaxPlayers - entry.FreePlayers;
@@ -69,13 +76,18 @@
                     <label id="descriptionText">
                         @entry.SportName
                         @entry.Location, @ViewBag.CityName
-                        Broj prijavljenih igrača: @filledSeats / @entry.MaxPlayers
+                        Broj prijavljenih igrača: @filledSeats/@entry.MaxPlayers
                         @entry.StartTime
                     </label>
+                </div>
+                <div class="buttonsDiv">
+                    <button class="buttonCheckIn btn btn-info">PRIJAVA</button>
+                    <button class="buttonDetails btn btn-secondary">DETALJI</button>
                 </div>
             </section>
         }
     </div>
 </div>
+
 
 

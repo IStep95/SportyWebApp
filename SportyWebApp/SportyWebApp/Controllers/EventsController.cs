@@ -2,6 +2,7 @@
 using SportyWebApp.WebAPI;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -13,15 +14,42 @@ namespace SportyWebApp.Controllers
     {
 
         API api = new API();
+        List<SportViewModel> allSports = new List<SportViewModel>();
+        List<EventViewModel> searchEvents = new List<EventViewModel>();
 
         // GET: Search
         public async Task<ActionResult> Search(string sportId, string date, string cityName, string freePlayers)
         {
+                       
+            UserViewModel userViewModel = (UserViewModel) Session["UserViewModel"];
+            if (userViewModel == null) return RedirectToAction("Login", "User");
 
-            UserViewModel uvm = (UserViewModel) Session["UserViewModel"];
+            allSports = await api.HttpGetAllSports(); 
+
+            // First call
+            if (sportId == null)
+            {
+                ViewBag.CityEntered = true;
+                ViewBag.AllSports = allSports;
+                ViewBag.FindMainDivHeight = "height: " + 900 + "px";
+                ViewBag.SearchEvents = searchEvents;
+                ViewBag.CurrentPage = "SearchEventPage";
+                return View();
+            }
 
             // TODO: Search events 
-            List<EventViewModel> searchEvents = await api.HttpGetTodayEvents(uvm.UserName);
+            if (cityName == "")
+            {
+                ViewBag.CityEntered = false;
+                ViewBag.AllSports = allSports;
+                ViewBag.FindMainDivHeight = "height: " + 900 + "px";
+                ViewBag.SearchEvents = searchEvents;
+                ViewBag.CurrentPage = "SearchEventPage";
+                return View();
+            }
+
+            ViewBag.CityEntered = true;
+            searchEvents = await api.HttpFindEvents(sportId, date, cityName, freePlayers);
             foreach (var entry in searchEvents)
             {
                 var sportName = entry.SportName;
@@ -37,10 +65,12 @@ namespace SportyWebApp.Controllers
                 }
             }
 
-            List<SportViewModel> allSports = await api.HttpGetAllSports();
-            
-           
-            ViewBag.MainTitle = "Traži događaj";
+            int resultsDivIDHeight = searchEvents.Count * 200;
+            if (resultsDivIDHeight < 400) resultsDivIDHeight = 500;
+            int findMaindDivHeight = 250 + resultsDivIDHeight;
+
+            ViewBag.FindMainDivHeight = "height: " + findMaindDivHeight + "px";
+            ViewBag.SideBarWrapperHeight = "height: " + findMaindDivHeight + "px";
             ViewBag.CurrentPage = "SearchEventPage";
             ViewBag.AllSports = allSports;
             ViewBag.SearchEvents = searchEvents;

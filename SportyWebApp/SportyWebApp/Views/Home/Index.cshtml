@@ -38,11 +38,16 @@
                         <label id="descriptionText">
                             @e.SportName
                             @e.Location, @Model.CityName
-                            Broj prijavljenih igrača: @filledSeats / @e.MaxPlayers
+                            Broj prijavljenih igrača: @filledSeats/@e.MaxPlayers
                             @e.StartTime                             
                         </label>
                     </div>
+                    <div class="buttonsDiv">
+                        <button class="buttonCheckIn btn btn-info">PRIJAVA</button>
+                        <button class="buttonDetails btn btn-secondary">DETALJI</button>
+                    </div>
                 </section>
+              
             }                      
 </div>
 

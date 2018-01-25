@@ -2,19 +2,20 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/simpleSidebar.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/search.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/shared.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/home.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/profile.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/register.css" rel="stylesheet"  type="text/css" />
+    <link href="~/Content/home.css" rel="stylesheet" type="text/css" />
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <h1 id="logoTitle">@ViewBag.MainTitle</h1>
-    @*<img src="~/Images/title.png" id="logoTitle" />*@
+    <h1 id="logoTitle">Sporty</h1>
     <div><ul id="navUl"><li class="navLi"></li></ul></div>
     <div id="wrapper">
         <!-- Sidebar -->
@@ -27,10 +28,10 @@
                 <li>@Html.ActionLink("NOVI DOGAĐAJ", "Create", "Events") </li>
                 <li>@Html.ActionLink("TRAŽI DOGAĐAJE", "Search", "Events")</li>
                 @if (ViewBag.CurrentPage != "HomePage")
-                {
-                  <li>@Html.ActionLink("DANAS U GRADU", "Index", "Home")</li>
+            {
+                    <li>@Html.ActionLink("DANAS U GRADU", "Index", "Home")</li>
                 }
-                <li>@Html.ActionLink("POSTAVKE PROFILA", "Index", "Profile")</li>
+                <li>@Html.ActionLink("POSTAVKE PROFILA", "Edit", "Profile")</li>
                 <li>@Html.ActionLink("ODJAVA", "Login", "User")</li>
             </ul>
         </div>
@@ -63,6 +64,16 @@
         });
     </script>
 
+    <!--Expand Side bar height after search-->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () { windowLoaded() });
+        function windowLoaded() {
+            console.log('loadano');
+            var mainHeight = document.getElementById("findEventsMainDiv").style.height;
+            document.getElementById("sidebar-wrapper").style.height = mainHeight;
+            console.log(mainHeight);
+        }      
+    </script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

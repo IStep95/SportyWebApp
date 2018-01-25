@@ -172,5 +172,30 @@ namespace SportyWebApp.WebAPI
             return allSports;
         }
 
+        public async Task<List<EventViewModel>> HttpFindEvents(string sportId, string date, string cityName, string freePlayers)
+        {
+            List<EventViewModel> searchEvents = new List<EventViewModel>();
+            _client.DefaultRequestHeaders.Clear();
+            string queryString;
+            DateTime dateAPIFormat;
+            if (DateTime.TryParse(date, out dateAPIFormat))
+            {
+                string dateString = dateAPIFormat.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                queryString = "?sportId=" + sportId + "&date=" + dateString + "&cityName=" + cityName + "&freePlayers=" + freePlayers;
+            }
+            else
+            {
+                queryString = "?sportId=" + sportId + "&date=" + date + "&cityName=" + cityName + "&freePlayers=" + freePlayers;
+            }
+            
+            HttpResponseMessage response = await _client.GetAsync("api/Events/FindEvents" + queryString);
+            if(response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadAsStringAsync();
+                searchEvents = JsonConvert.DeserializeObject<List<EventViewModel>>(data);
+            }
+            return searchEvents;
+        }
+
     }
 }

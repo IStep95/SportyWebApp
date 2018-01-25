@@ -18,7 +18,11 @@ namespace SportyWebApp.Controllers
         public async Task<ActionResult> Index(UserViewModel userViewModel)
         {       
             _userViewModel = (UserViewModel) Session["UserViewModel"];
+            if (_userViewModel == null) return RedirectToAction("Login", "User");
+
             List<EventViewModel> todayEvents = await _api.HttpGetTodayEvents(_userViewModel.UserName);
+            DateTime currentTime = DateTime.Now;
+            todayEvents.RemoveAll(e => e.StartTime < currentTime);
             foreach (var entry in todayEvents)
             {
                 var sportName = entry.SportName;
