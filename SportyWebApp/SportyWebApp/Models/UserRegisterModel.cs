@@ -48,5 +48,29 @@ namespace SportyWebApp.Models
         [Display(Name = "Ponovljena ozinka")]
         [Compare(nameof(Password), ErrorMessage = "Lozinke se ne podudaraju!")]
         public string ConfirmPassword { get; set; }
+
+        public bool IsChecked { get; set; }
+        public bool PasswordMatch { get; set; }
+
+        public bool EmptyCheck()
+        {
+            if (FirstName == null || LastName == null || UserName == null || Email == null || City == null || Password == null || ConfirmPassword == null)
+            {
+                IsChecked = false;
+                return false;
+            }
+            IsChecked = true;
+            return true;
+        }
+        public bool PasswordCheck()
+        {
+            if (Password.Equals(ConfirmPassword))
+            {
+                PasswordMatch = true;
+                return true;
+            }
+            PasswordMatch = false;
+            return false;
+        }
     }
 }

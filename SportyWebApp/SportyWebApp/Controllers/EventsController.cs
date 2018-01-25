@@ -87,6 +87,7 @@ namespace SportyWebApp.Controllers
 
             List<EventListModel> events = await api.HttpGetEvents(username, time.ToLower());
             ViewBag.FutureEvents = events;
+            ViewBag.MainTitle = "Moji događaji";
             return View((UserViewModel)Session["UserViewModel"]);
         }
 
@@ -99,26 +100,68 @@ namespace SportyWebApp.Controllers
 
             List<EventListModel> events = await api.HttpGetEvents(username, time.ToLower());
             ViewBag.PastEvents = events;
+            ViewBag.MainTitle = "Moji događaji";
             return View((UserViewModel)Session["UserViewModel"]);
         }
 
         // GET: Event/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            EventDetailsModel model = await api.HttpGetEvent(id);
+            //UserEventModel user1 = new UserEventModel();
+            //user1.FirstName = "Ime";
+            //user1.LastName = "Prezime";
+            //user1.UserName = "Korisničko ime";
+            //user1.Rating = 3;
+            //UserEventModel user2 = new UserEventModel();
+            //user2.FirstName = "Ime";
+            //user2.LastName = "Prezime";
+            //user2.UserName = "Korisničko ime";
+            //user2.Rating = 3;
+            //UserEventModel user3 = new UserEventModel();
+            //user3.FirstName = "Ime";
+            //user3.LastName = "Prezime";
+            //user3.UserName = "Korisničko ime";
+            //user3.Rating = 3;
+            //UserEventModel user4 = new UserEventModel();
+            //user4.FirstName = "Ime";
+            //user4.LastName = "Prezime";
+            //user4.UserName = "Korisničko ime";
+            //user4.Rating = 3;
+            //UserEventModel user5 = new UserEventModel();
+            //user5.FirstName = "Ime";
+            //user5.LastName = "Prezime";
+            //user5.UserName = "Korisničko ime";
+            //user5.Rating = 3;
+            //UserEventModel user6 = new UserEventModel();
+            //user6.FirstName = "Ime";
+            //user6.LastName = "Prezime";
+            //user6.UserName = "Korisničko ime";
+            //user6.Rating = 3;
+            //model.lstUsers.Add(user1);
+            //model.lstUsers.Add(user2);
+            //model.lstUsers.Add(user3);
+            //model.lstUsers.Add(user4);
+            //model.lstUsers.Add(user5);
+            //model.lstUsers.Add(user6);
+            bool isPlayer = false;
+            string username = ((UserViewModel)Session["UserViewModel"]).UserName;
+            int count = model.lstUsers.Where(e => e.UserName == username).Count();
+            if (count > 0)
+                isPlayer = true;
+            ViewBag.isPlayer = isPlayer;
+            ViewBag.users = model.lstUsers;
+            ViewBag.MainTitle = "Pregled događaja";
+            return View(model);
         }
 
         // GET: Event/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            List<SportViewModel> lst = new List<SportViewModel>()
-            {
-                new SportViewModel() {Id=1, Name="Mali nogomet"},
-                new SportViewModel() {Id=2, Name="Košarka"},
-                new SportViewModel() {Id=3, Name="Odbojka"}
-            };
+            List<SportViewModel> lst = await api.HttpGetAllSports();
             EventCreateModel model = new EventCreateModel();
             model.lstSports = lst;
+            ViewBag.MainTitle = "Novi dagađaj";
             return View(model);
         }
 

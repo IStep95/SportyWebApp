@@ -46,15 +46,26 @@ namespace SportyWebApp.Controllers
         
         // GET: User/Register
         [HttpGet]
-        public async Task<ActionResult> Register()
+        public ActionResult Register()
         {
-            return await Create(_userRegisterModel);
+            UserRegisterModel model = new UserRegisterModel();
+            return View(model);
         }
 
         // POST: User/Create
         [HttpPost]
-        public async Task<ActionResult> Create([Bind(Include = "FirstName,LastName,Email,City,Password,UserName")] UserRegisterModel user)
+        public async Task<ActionResult> Register([Bind(Include = "FirstName,LastName,Email,City,Password,UserName,ConfirmPassword")] UserRegisterModel user)
         {
+            if (!user.EmptyCheck())
+            {
+                ViewBag.error = "Popunite sve podatke!";
+                return View(user);
+            }
+            if (!user.PasswordCheck())
+            {
+                ViewBag.error = "Lozinke se ne podudaraju!";
+                return View(user);
+            }
             string response = await api.HttpCreateUser(user);
             if (response.Equals("OK"))
             {
@@ -64,8 +75,7 @@ namespace SportyWebApp.Controllers
             }
             else
             {
-                ViewBag.poruka = response;
-                user.Password = "";
+                ViewBag.error = response;
                 return View(user);
             }
         }

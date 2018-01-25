@@ -6,6 +6,10 @@
     margin-top: 10%;
 }
 
+.fix{
+    height: 35px !important;
+}
+
 .reg-input {
     width: 300px;
     height: 30px;
@@ -28,30 +32,28 @@
         transform: scale(1.5);
     }
 
-.left-side {
-    padding-right: 7%;
-    padding-top: 5%;
-    text-align: right;
-}
-
-.right-side {
-    padding-top: 2%;
-    padding-left: 3%;
-    text-align: left;
-}
-
 .form-group {
     padding-bottom: 12px;
 }
 
 .reg-btn {
     width: 180px;
+    height: 35px;
     background-color: lightsteelblue;
     color: blue;
+    font-weight: bold;
 }
 
 .event-register{
     margin: auto;
     padding-left: 25%;
     color: blue;
+}
+
+.eventLabels {
+    text-align: end;
+    padding-left: 5%;
+    color: #0667d0;
+    font-family: sans-serif;
+    font-weight: bold;
 }
