@@ -70,7 +70,12 @@
         function windowLoaded() {
             console.log('loadano');
             var mainHeight = document.getElementById("findEventsMainDiv").style.height;
+            if (mainHeight < '900px')
+            {
+                mainHeight = '900px'
+            }
             document.getElementById("sidebar-wrapper").style.height = mainHeight;
+            document.getElementById("findEventsMainDiv").style.height = mainHeight;
             console.log(mainHeight);
         }      
     </script>

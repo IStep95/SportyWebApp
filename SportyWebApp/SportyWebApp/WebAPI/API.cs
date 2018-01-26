@@ -206,7 +206,7 @@ namespace SportyWebApp.WebAPI
 	        DateTime dateAPIFormat;
 	        if (DateTime.TryParse(date, out dateAPIFormat))
 	        {
-	            string dateString = dateAPIFormat.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+	            string dateString = dateAPIFormat.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture);
 	            queryString = "?sportId=" + sportId + "&date=" + dateString + "&cityName=" + cityName + "&freePlayers=" + freePlayers;
 	        }
 	        else
