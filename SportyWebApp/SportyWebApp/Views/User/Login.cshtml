@@ -28,9 +28,16 @@
                     {   
                         <tr>
                             <td></td>
-                            <td id="errorMessage">Uneseno korisničko ime ili lozinka je neispravno.</td>
+                            <td class="errorMessage">Uneseno korisničko ime ili lozinka je neispravno.</td>
                         </tr>
-                    }                    
+                    }
+                    @if (Model.InternetNotAvaiable)
+                    {
+                        <tr>
+                            <td></td>
+                            <id class="errorMessage internetConnectionMessage">Provjerite internet konekciju.</id>
+                        </tr>
+                    }
                     <tr>
                         <td class="formLabels">Korisničko ime:</td>
                         <td><input type="text" name="username" class="reg-input"/></td>

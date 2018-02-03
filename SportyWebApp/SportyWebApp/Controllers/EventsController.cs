@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Reflection;
 
 namespace SportyWebApp.Controllers
 {
@@ -17,6 +18,11 @@ namespace SportyWebApp.Controllers
         List<SportViewModel> allSports = new List<SportViewModel>();
         List<EventListModel> searchEvents = new List<EventListModel>();
 
+        [HttpGet]
+        public ActionResult Subscribe(int id)
+        {
+            return PartialView("_Subscribe", id);
+        }
         // GET: Search
         public async Task<ActionResult> Search(string sportId, string date, string cityName, string freePlayers)
         {                      
@@ -30,7 +36,6 @@ namespace SportyWebApp.Controllers
             {
                 ViewBag.CityEntered = true;
                 ViewBag.AllSports = allSports;
-                ViewBag.FindMainDivHeight = "height: " + 900 + "px";
                 ViewBag.SearchEvents = searchEvents;
                 ViewBag.CurrentPage = "SearchEventPage";
                 return View();
@@ -41,7 +46,6 @@ namespace SportyWebApp.Controllers
             {
                 ViewBag.CityEntered = false;
                 ViewBag.AllSports = allSports;
-                ViewBag.FindMainDivHeight = "height: " + 900 + "px";
                 ViewBag.SearchEvents = searchEvents;
                 ViewBag.CurrentPage = "SearchEventPage";
                 return View();
@@ -63,15 +67,14 @@ namespace SportyWebApp.Controllers
             if (resultsDivIDHeight < 400) resultsDivIDHeight = 500;
             int findMaindDivHeight = 250 + resultsDivIDHeight;
 
-            ViewBag.FindMainDivHeight = "height: " + findMaindDivHeight + "px";
-            ViewBag.SideBarWrapperHeight = "height: " + findMaindDivHeight + "px";
+
             ViewBag.CurrentPage = "SearchEventPage";
             ViewBag.AllSports = allSports;
             ViewBag.SearchEvents = searchEvents;
             ViewBag.CityName = cityName;
             return View();
         }
-
+        
         public async Task<ActionResult> FutureEvents()
         {
             string username = ((UserViewModel)Session["UserViewModel"]).UserName;
@@ -244,6 +247,27 @@ namespace SportyWebApp.Controllers
                 return View();
             }
         }
+        public class RequireRequestValueAttribute : ActionMethodSelectorAttribute
+        {
+            public RequireRequestValueAttribute(string valueName)
+            {
+                if (valueName == null)
+                {
+                    ValueName = "";
+                }
+                else
+                {
+                    ValueName = valueName;
+                }         
+            }
+            public override bool IsValidForRequest(ControllerContext controllerContext, MethodInfo methodInfo)
+            {
+                return (controllerContext.HttpContext.Request[ValueName] != null);
+            }
+
+            public string ValueName { get; private set; }
+        }
+
     }
 
 }

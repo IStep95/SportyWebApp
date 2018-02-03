@@ -12,6 +12,7 @@
     <link href="~/Content/profile.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/register.css" rel="stylesheet"  type="text/css" />
     <link href="~/Content/home.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/subscribe.css" rel="stylesheet" type="text/css" />
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -55,6 +56,7 @@
     <!-- jQuery -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script> 
     <!-- Menu Toggle Script -->
     <script>
         $("#menu-toggle").click(function (e) {
@@ -63,22 +65,9 @@
             $("#wrapper").toggleClass("toggled");
         });
     </script>
-
-    <!--Expand Side bar height after search-->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () { windowLoaded() });
-        function windowLoaded() {
-            console.log('loadano');
-            var mainHeight = document.getElementById("findEventsMainDiv").style.height;
-            if (mainHeight < '900px')
-            {
-                mainHeight = '900px'
-            }
-            document.getElementById("sidebar-wrapper").style.height = mainHeight;
-            document.getElementById("findEventsMainDiv").style.height = mainHeight;
-            console.log(mainHeight);
-        }      
-    </script>
+    @Scripts.Render("~/Scripts/jquery-3.3.1.js")
+    @Scripts.Render("~/Scripts/layout.js")
+    @Scripts.Render("~/Scripts/event.js")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

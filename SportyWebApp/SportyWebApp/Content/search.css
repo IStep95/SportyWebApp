@@ -228,9 +228,11 @@ input::-webkit-outer-spin-button {
     margin-left: -12%;
 }
 
-
-
 footer {
     padding-left: 10%;
     position:absolute;
+}
+
+#findEventsMainDiv {
+    height: 850px;
 }

@@ -2,6 +2,7 @@
 @model UserViewModel
 
 <div id="homeMainDiv">
+    @Html.Partial("_Subscribe")
     <h3 id="homeTitle">DANAS U GRADU:</h3>
             @foreach (EventListModel entry in ViewBag.EventsToday)
             {

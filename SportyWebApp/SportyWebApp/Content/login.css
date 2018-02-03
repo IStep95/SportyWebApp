@@ -67,7 +67,10 @@ body {
 
 }
 
-#errorMessage {
+.errorMessage {
     color: red;
 }
 
+.internetConnectionMessage {
+    margin-left: 33%;
+}

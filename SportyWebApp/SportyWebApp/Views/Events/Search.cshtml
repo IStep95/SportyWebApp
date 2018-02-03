@@ -1,8 +1,9 @@
 ﻿@{int sportId = 1; }
 @using SportyWebApp.Models
 
-<div id="findEventsMainDiv" style = "@ViewBag.FindMainDivHeight">
+<div id="findEventsMainDiv">
     <h3 id="findEventTitle">PRETRAGA DOGAĐAJA:</h3>
+    @Html.Partial("_Subscribe")
     <div class="findDiv">
         <form method="get" action="@Url.Action("Search", "Events")">
             <div class="one">

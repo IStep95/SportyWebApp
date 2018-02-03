@@ -4,6 +4,7 @@ using SportyWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,12 +41,9 @@ namespace SportyWebApp.WebAPI
             JObject jsonObject = new JObject();
             jsonObject.Add("UserName", username);
             jsonObject.Add("Password", password);
-
             var content = new StringContent(jsonObject.ToString(), Encoding.UTF8, "application/json");
 
-
-            var response = await _client.PostAsync("/api/Users/Login", content);
-
+            HttpResponseMessage response = await _client.PostAsync("/api/Users/Login", content);
             if (response.IsSuccessStatusCode)
             {
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -57,7 +55,6 @@ namespace SportyWebApp.WebAPI
             }
             return null;
         }
-
 
         public async Task<string> HttpCreateUser(UserRegisterModel user)
         {
@@ -222,5 +219,23 @@ namespace SportyWebApp.WebAPI
 	        }
 	        return searchEvents;
 	    }
-	}
+
+        public bool InternetConnectionEstablished()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                {
+                    using (client.OpenRead("http://clients3.google.com/generate_204"))
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+    }
 }

@@ -1,0 +1,12 @@
+﻿#myModal {
+    background-color: #e4e4e4;
+    height: 220px;
+    width: 500px;
+    margin-left: 600px;
+    margin-top: 300px;
+    box-shadow: 5px 10px #888888;
+}
+.modal-backdrop {
+    background-color: black;
+    opacity: 0.3;
+}
