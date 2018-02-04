@@ -1,48 +1,12 @@
 ﻿@using SportyWebApp.Models
 @model UserViewModel
 
-
 <div id="homeMainDiv">
+    @Html.Partial("_Subscribe")
     <h3 id="homeTitle">DANAS U GRADU:</h3>
-            @foreach (var e in ViewBag.EventsToday)
+            @foreach (EventListModel entry in ViewBag.EventsToday)
             {
-                var filledSeats = e.MaxPlayers - e.FreePlayers;
-                <section class="sportCard">
-                    <div class="iconDiv">                     
-                    @if (e.SportName == "Mali nogomet")
-                    {
-                        <img src="~/Images/footballBall.png" class="sportBallIcon" />
-                    }
-                    else if (e.SportName == "Nogomet")
-                    {
-                        <img src="~/Images/footballBall.png" class="sportBallIcon" />
-                    }
-                    else if (e.SportName == "Rukomet")
-                    {
-                        <img src="~/Images/handballBall.png" class="sportBallIcon" />
-                    }
-                    else if (e.SportName == "Košarka")
-                    {
-                        <img src="~/Images/basketballBall.png" class="sportBallIcon" />
-                    }
-                    else if (e.SportName == "Badminton")
-                    {
-                        <img src="~/Images/badmintonBall.png" class="sportBallIcon" />
-                    }
-                    else if (e.SportName == "Tenis")
-                    {
-                        <img src="~/Images/tennisRacket.png" class="sportBallIcon" />
-                    }
-                    </div>
-                    <div class="descriptionDiv">
-                        <label id="descriptionText">
-                            @e.SportName
-                            @e.Location, @Model.CityName
-                            Broj prijavljenih igrača: @filledSeats / @e.MaxPlayers
-                            @e.StartTime                             
-                        </label>
-                    </div>
-                </section>
+                @Html.Partial("_Event", entry)
             }                      
 </div>
 

@@ -2,10 +2,12 @@
 using SportyWebApp.WebAPI;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Reflection;
 
 namespace SportyWebApp.Controllers
 {
@@ -13,15 +15,44 @@ namespace SportyWebApp.Controllers
     {
 
         API api = new API();
+        List<SportViewModel> allSports = new List<SportViewModel>();
+        List<EventListModel> searchEvents = new List<EventListModel>();
 
+        [HttpGet]
+        public ActionResult Subscribe(int id)
+        {
+            return PartialView("_Subscribe", id);
+        }
         // GET: Search
         public async Task<ActionResult> Search(string sportId, string date, string cityName, string freePlayers)
-        {
+        {                      
+            UserViewModel userViewModel = (UserViewModel) Session["UserViewModel"];
+            if (userViewModel == null) return RedirectToAction("Login", "User");
 
-            UserViewModel uvm = (UserViewModel) Session["UserViewModel"];
+            allSports = await api.HttpGetAllSports(); 
 
-            // TODO: Search events 
-            List<EventViewModel> searchEvents = await api.HttpGetTodayEvents(uvm.UserName);
+            // First request
+            if (sportId == null)
+            {
+                ViewBag.CityEntered = true;
+                ViewBag.AllSports = allSports;
+                ViewBag.SearchEvents = searchEvents;
+                ViewBag.CurrentPage = "SearchEventPage";
+                return View();
+            }
+            
+            // Search request
+            if (cityName == "")
+            {
+                ViewBag.CityEntered = false;
+                ViewBag.AllSports = allSports;
+                ViewBag.SearchEvents = searchEvents;
+                ViewBag.CurrentPage = "SearchEventPage";
+                return View();
+            }
+
+            ViewBag.CityEntered = true;
+            searchEvents = await api.HttpFindEvents(sportId, date, cityName, freePlayers);
             foreach (var entry in searchEvents)
             {
                 var sportName = entry.SportName;
@@ -30,24 +61,20 @@ namespace SportyWebApp.Controllers
                     sportName = sportName.First().ToString().ToUpper() + sportName.Substring(1);
                     entry.SportName = sportName;
                 }
-                if (cityName != null)
-                {
-                    entry.City = new CityViewModel();
-                    entry.City.Name = cityName;
-                }
             }
 
-            List<SportViewModel> allSports = await api.HttpGetAllSports();
-            
-           
-            ViewBag.MainTitle = "Traži događaj";
+            int resultsDivIDHeight = searchEvents.Count * 200;
+            if (resultsDivIDHeight < 400) resultsDivIDHeight = 500;
+            int findMaindDivHeight = 250 + resultsDivIDHeight;
+
+
             ViewBag.CurrentPage = "SearchEventPage";
             ViewBag.AllSports = allSports;
             ViewBag.SearchEvents = searchEvents;
             ViewBag.CityName = cityName;
             return View();
         }
-
+        
         public async Task<ActionResult> FutureEvents()
         {
             string username = ((UserViewModel)Session["UserViewModel"]).UserName;
@@ -198,6 +225,27 @@ namespace SportyWebApp.Controllers
                 return View();
             }
         }
+        public class RequireRequestValueAttribute : ActionMethodSelectorAttribute
+        {
+            public RequireRequestValueAttribute(string valueName)
+            {
+                if (valueName == null)
+                {
+                    ValueName = "";
+                }
+                else
+                {
+                    ValueName = valueName;
+                }         
+            }
+            public override bool IsValidForRequest(ControllerContext controllerContext, MethodInfo methodInfo)
+            {
+                return (controllerContext.HttpContext.Request[ValueName] != null);
+            }
+
+            public string ValueName { get; private set; }
+        }
+
     }
 
 }

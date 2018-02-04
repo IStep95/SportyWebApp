@@ -4,6 +4,7 @@ using SportyWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,12 +41,9 @@ namespace SportyWebApp.WebAPI
             JObject jsonObject = new JObject();
             jsonObject.Add("UserName", username);
             jsonObject.Add("Password", password);
-
             var content = new StringContent(jsonObject.ToString(), Encoding.UTF8, "application/json");
 
-
-            var response = await _client.PostAsync("/api/Users/Login", content);
-
+            HttpResponseMessage response = await _client.PostAsync("/api/Users/Login", content);
             if (response.IsSuccessStatusCode)
             {
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -57,7 +55,6 @@ namespace SportyWebApp.WebAPI
             }
             return null;
         }
-
 
         public async Task<string> HttpCreateUser(UserRegisterModel user)
         {
@@ -84,10 +81,9 @@ namespace SportyWebApp.WebAPI
             return responseObject.GetValue("Message").ToString();
         }
 
-        public async Task<List<EventViewModel>> HttpGetTodayEvents(string username)
+        public async Task<List<EventListModel>> HttpGetTodayEvents(string username)
         {
-            List<EventViewModel> todayEvents = new List<EventViewModel>();
-
+            List<EventListModel> todayEvents = new List<EventListModel>();
             _client.DefaultRequestHeaders.Clear();
             DateTime date = DateTime.Now;
             string dateString = date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
@@ -97,7 +93,7 @@ namespace SportyWebApp.WebAPI
             if (response.IsSuccessStatusCode)
             {
                 var data = await response.Content.ReadAsStringAsync();
-                todayEvents = JsonConvert.DeserializeObject<List<EventViewModel>>(data);
+                todayEvents = JsonConvert.DeserializeObject<List<EventListModel>>(data);
 
             }
             return todayEvents;
@@ -154,8 +150,7 @@ namespace SportyWebApp.WebAPI
             model.lstUsers = lst;
             return model;
         }
-
-
+		
         public async Task<List<EventListModel>> HttpGetEvents(string username, string time)
         {
             List<EventListModel> lst = new List<EventListModel>();
@@ -244,6 +239,49 @@ namespace SportyWebApp.WebAPI
                 lstEvents = JsonConvert.DeserializeObject<List<EventListModel>>(data);
             }
             return lstEvents;
+        }
+
+	    public async Task<List<EventListModel>> HttpFindEvents(string sportId, string date, string cityName, string freePlayers)
+	    {
+	        List<EventListModel> searchEvents = new List<EventListModel>();
+	        _client.DefaultRequestHeaders.Clear();
+	        string queryString;
+	        DateTime dateAPIFormat;
+	        if (DateTime.TryParse(date, out dateAPIFormat))
+	        {
+	            string dateString = dateAPIFormat.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture);
+	            queryString = "?sportId=" + sportId + "&date=" + dateString + "&cityName=" + cityName + "&freePlayers=" + freePlayers;
+	        }
+	        else
+	        {
+	            queryString = "?sportId=" + sportId + "&date=" + date + "&cityName=" + cityName + "&freePlayers=" + freePlayers;
+	        }
+	        
+	        HttpResponseMessage response = await _client.GetAsync("api/Events/FindEvents" + queryString);
+	        if(response.IsSuccessStatusCode)
+	        {
+	            var data = await response.Content.ReadAsStringAsync();
+	            searchEvents = JsonConvert.DeserializeObject<List<EventListModel>>(data);
+	        }
+	        return searchEvents;
+	    }
+
+        public bool InternetConnectionEstablished()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                {
+                    using (client.OpenRead("http://clients3.google.com/generate_204"))
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

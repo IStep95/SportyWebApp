@@ -19,7 +19,7 @@ namespace SportyWebApp.Controllers
             ViewBag.lstEvents = await api.HttpGetSubscriptionEvents(SubId);
             //obrisat
             string username = ((UserViewModel)Session["UserViewModel"]).UserName;
-            List<EventListModel> events = await api.HttpGetEvents(username, "dd");
+            List<EventListModel> events = await api.HttpGetEvents(username, "a");
             ViewBag.lstEvents = events;
 
 

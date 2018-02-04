@@ -1,6 +1,9 @@
 ﻿@{int sportId = 1; }
+@using SportyWebApp.Models
+
 <div id="findEventsMainDiv">
-    <h3 id="findEventTitle">Pretraga događaja:</h3>
+    <h3 id="findEventTitle">PRETRAGA DOGAĐAJA:</h3>
+    @Html.Partial("_Subscribe")
     <div class="findDiv">
         <form method="get" action="@Url.Action("Search", "Events")">
             <div class="one">
@@ -18,7 +21,14 @@
             </div>
             <div class="two">
                 <label class="labels">Grad:</label>
-                <input type="text" id="cityInput" name="cityName" />
+                @if (ViewBag.CityEntered == false)
+                {
+                    <input type="text" id="cityInput" name="cityName" placeholder="Grad je obavezan za pretragu." />
+                }
+                else
+                {
+                    <input type="text" id="cityInput" name="cityName" />
+                }
                 <br />
                 <label class="labels" id="freePlayersLabel">Broj slobodnih mjesta:</label>
                 <select id="freePlayers" name="freePlayers">
@@ -27,55 +37,20 @@
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
-                    <option value=">5">5 i više</option>
+                    <option value="5">5</option>
                 </select>
                 <button class="buttons" id="searchButton" type="submit">TRAŽI</button>
             </div>
         </form>
     </div>
     <hr class="horizontalLine"/>
-    <div class="resultsDiv">
-        @foreach (var entry in @ViewBag.SearchEvents)
+    <div id="resultsDivID" class="resultsDiv">
+        @foreach (EventListModel entry in @ViewBag.SearchEvents)
         {
-            var filledSeats = entry.MaxPlayers - entry.FreePlayers;
-            <section class="sportCard">
-                <div class="iconDiv">
-                    @if (entry.SportName == "Mali nogomet")
-                    {
-                        <img src="~/Images/footballBall.png" class="sportBallIcon" />
-                    }
-                    else if (entry.SportName == "Nogomet")
-                    {
-                        <img src="~/Images/footballBall.png" class="sportBallIcon" />
-                    }
-                    else if (entry.SportName == "Rukomet")
-                    {
-                        <img src="~/Images/handballBall.png" class="sportBallIcon" />
-                    }
-                    else if (entry.SportName == "Košarka")
-                    {
-                        <img src="~/Images/basketballBall.png" class="sportBallIcon" />
-                    }
-                    else if (entry.SportName == "Badminton")
-                    {
-                        <img src="~/Images/badmintonBall.png" class="sportBallIcon" />
-                    }
-                    else if (entry.SportName == "Tenis")
-                    {
-                        <img src="~/Images/tennisRacket.png" class="sportBallIcon" />
-                    }
-                </div>
-                <div class="descriptionDiv">
-                    <label id="descriptionText">
-                        @entry.SportName
-                        @entry.Location, @ViewBag.CityName
-                        Broj prijavljenih igrača: @filledSeats / @entry.MaxPlayers
-                        @entry.StartTime
-                    </label>
-                </div>
-            </section>
+            @Html.Partial("_Event", entry)          
         }
     </div>
 </div>
+
 
 

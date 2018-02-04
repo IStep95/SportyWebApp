@@ -1,0 +1,61 @@
+﻿
+<div id="profileMainDiv">
+    <h3 id="profileTitle">UREDITE SVOJE PODATKE:</h3>
+    <form action="@Url.Action("Save", "Profile")" method="post">
+        <div id="divForm">
+            <label class="inputLabels">Ime:</label>
+            <div>
+                <input type="text" class="reg-input" name="firstName" value="@ViewBag.FirstName" disabled/>
+            </div>
+            <label class="inputLabels">Prezime:</label>
+            <div>
+                <input type="text" class="reg-input" name="lastName" value="@ViewBag.LastName" disabled/>
+            </div>
+            <label class="inputLabels">Korisničko ime:</label>
+            <div>
+                <input type="text" class="reg-input" name="username" value="@ViewBag.Username" disabled/>
+            </div>
+            <label class="inputLabels">Email:</label>
+            <div>
+                <input type="text" class="reg-input" name="email" value="@ViewBag.Email"disabled/>
+            </div>
+            <label class="inputLabels">Grad:</label>
+            <div>
+                <input type="text" class="reg-input" name="cityName" value="@ViewBag.CityName" disabled/>
+            </div>
+            <section id="controlButtonsSection">
+                <div id="editButtonDiv">
+                    <button type="button" id="editProfileDataButton" class="btn btn-info profile-btn">Uredi</button>
+                </div>
+                <div id="saveButtonDiv">
+                    <button id="saveProfileDataButton" class="btn btn-info profile-btn" type="submit" disabled>Spremi</button>
+                </div>
+            </section>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.getElementById("editProfileDataButton").onclick = function () { clickedFunction() };
+
+    function clickedFunction() {      
+        var inputs = document.getElementsByTagName('input');
+        var saveButton = document.getElementById('saveProfileDataButton');
+
+        if (inputs[0].disabled == true) 
+        {
+            for (i = 0; i < inputs.length; i++) {
+                inputs[i].disabled = false;
+            }
+            saveButton.disabled = false;
+        }
+        else 
+        {
+            for (i = 0; i < inputs.length; i++) {
+               inputs[i].disabled = true;
+            }
+            saveButton.disabled = true;
+        }
+    }
+</script>
+

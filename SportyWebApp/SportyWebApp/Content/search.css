@@ -20,7 +20,6 @@
 
 .resultsDiv {
     margin-top: 2%;
-    height: inherit; 
     width:522px;
     float: left;
 }
@@ -119,6 +118,12 @@ select#sportSelect, select#soflow-color {
     font-family: 'Open Sans';
 }
 
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: red;
+    opacity: 1; /* Firefox */
+}
+
 #freePlayers {
     -webkit-appearance: button;
     -webkit-border-radius: 2px;
@@ -167,6 +172,7 @@ input::-webkit-outer-spin-button {
 #searchButton {
     color: black;
     background-color: #42ef6e;
+    border: 1px solid #49af25;
 }
 
 .buttons {
@@ -174,7 +180,6 @@ input::-webkit-outer-spin-button {
     height: 32px;
     font-family: 'Open Sans';
     font-weight: bold;
-    border: 1px solid #49af25;
     border-radius: 5px;
 }
 
@@ -226,4 +231,8 @@ input::-webkit-outer-spin-button {
 footer {
     padding-left: 10%;
     position:absolute;
+}
+
+#findEventsMainDiv {
+    height: 850px;
 }

@@ -40,11 +40,28 @@ footer {
 }
 
 .descriptionDiv {
-    margin-left: 20%;
+    margin-left: 10%;
     margin-top: -2%;
+    width: 300px;
+    height: 150px;
+    float: left;
+}
+
+.buttonsDiv {
+    margin-left: 75%;
+    margin-top: 0%;
+    width: 200px;
     height: 150px;
 }
 
+.buttonCheckIn {
+    margin-top: 18%;
+}
+
+.buttonDetails {
+    margin-top: 18%;
+    margin-left: 15%;
+}
 #descriptionText {
     white-space: pre-wrap;
     color: white;

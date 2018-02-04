@@ -1,5 +1,6 @@
 ﻿@model SportyWebApp.Models.EventListModel
 @{var filledSeats = Model.MaxPlayers - Model.FreePlayers; }
+
 <section class="sportCard">
     <div class="iconDiv">
         @if (Model.SportName == "Mali nogomet")
@@ -27,8 +28,12 @@
         <label id="descriptionText" style="margin-left: 0%;">
             @Model.SportName
             @Model.Location, @Model.CityName
-            Broj prijavljenih igrača: @filledSeats / @Model.MaxPlayers
+            Broj prijavljenih igrača: @filledSeats/@Model.MaxPlayers
             @Model.StartTime
         </label>
+    </div>
+    <div class="buttonsDiv">
+        <button class="buttonCheckIn btn btn-info" onclick="subsribeEventShowModal(this)" data-id="@Model.Id">PRIJAVA</button>
+        <button class="buttonDetails btn btn-secondary" onclick="">DETALJI</button>
     </div>
 </section>

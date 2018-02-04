@@ -29,8 +29,14 @@ namespace SportyWebApp.Controllers
         [HttpPost]
         public async Task<ActionResult> Submit(string username, string password)
         {
-            _userViewModel = await api.HttpGetUser(username, password);
-           
+            if(!api.InternetConnectionEstablished())
+            {
+                _userLoginModel.InternetNotAvaiable = true;
+                return RedirectToAction("Login", "User", _userLoginModel);
+            }
+
+            _userLoginModel.InternetNotAvaiable = false;
+            _userViewModel = await api.HttpGetUser(username, password);  
             if (_userViewModel != null)
             {
                 _userLoginModel.UserNotExist = false;
