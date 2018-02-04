@@ -1,7 +1,7 @@
 ﻿const DEFAULT_SIDEBAR_HEIGHT = '1000px';
+const DEFAULT_COL_LG_12_HEIGHT = '900px'; 
 
 
-//  Expand Side bar height after search
 document.addEventListener("DOMContentLoaded", function () { windowLoaded() });
 function windowLoaded() {
    
@@ -12,12 +12,15 @@ function windowLoaded() {
     }
     else
     {
-        sideBarWrapperHeight = document.getElementsByClassName("page-content-wrapper").height;
-        if (sideBarWrapperHeight < DEFAULT_SIDEBAR_HEIGHT)
+        sideBarWrapperHeight = $("#page-content-wrapper").css("height");    
+        var sideBarWrapperHeightInt = parseInt(sideBarWrapperHeight, 10);
+        var DEFAULT_SIDEBAR_HEIGHT_INT = parseInt(DEFAULT_SIDEBAR_HEIGHT, 10);
+
+        if (sideBarWrapperHeightInt < DEFAULT_SIDEBAR_HEIGHT_INT)
         {
             sideBarWrapperHeight = DEFAULT_SIDEBAR_HEIGHT;
-            document.getElementById("container-fluid").style.height = '900 px';
-        }
+            document.getElementById("col-lg-12").style.height = DEFAULT_COL_LG_12_HEIGHT;    
+        }  
     }
     document.getElementById("sidebar-wrapper").style.height = sideBarWrapperHeight;
 }      

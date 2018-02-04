@@ -13,7 +13,7 @@
         <h3 id="homeTitle">PROŠLI DOGAĐAJI:</h3>
         @foreach (EventListModel e in ViewBag.PastEvents)
         {
-            @Html.Partial("_Event", e)
+            @Html.Partial("_PastEvent", e)
         }
     </div>
 </body>

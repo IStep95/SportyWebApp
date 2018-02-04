@@ -40,9 +40,9 @@
         <!-- /#sidebar-wrapper -->
         <!-- Page Content -->
         <div id="page-content-wrapper">
-            <div class="container-fluid">
+            <div id="container-fluid" class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div id="col-lg-12" class="col-lg-12">
                         @RenderBody()
                     </div>
                 </div>
@@ -57,7 +57,6 @@
     <!-- jQuery -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script> 
     <!-- Menu Toggle Script -->
     <script>
         $("#menu-toggle").click(function (e) {

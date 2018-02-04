@@ -77,6 +77,9 @@ namespace SportyWebApp.Controllers
         
         public async Task<ActionResult> FutureEvents()
         {
+            UserViewModel userViewModel = (UserViewModel)Session["UserViewModel"];
+            if (userViewModel == null) return RedirectToAction("Login", "User");
+
             string username = ((UserViewModel)Session["UserViewModel"]).UserName;
             string url = HttpContext.Request.Url.AbsoluteUri;
             int index = url.LastIndexOf('/');
@@ -90,6 +93,9 @@ namespace SportyWebApp.Controllers
 
         public async Task<ActionResult> PastEvents()
         {
+            UserViewModel userViewModel = (UserViewModel)Session["UserViewModel"];
+            if (userViewModel == null) return RedirectToAction("Login", "User");
+
             string username = ((UserViewModel)Session["UserViewModel"]).UserName;
             string url = HttpContext.Request.Url.AbsoluteUri;
             int index = url.LastIndexOf('/');
@@ -104,6 +110,9 @@ namespace SportyWebApp.Controllers
         // GET: Event/Details/5
         public async Task<ActionResult> Details(int id)
         {
+            UserViewModel userViewModel = (UserViewModel)Session["UserViewModel"];
+            if (userViewModel == null) return RedirectToAction("Login", "User");
+
             EventDetailsModel model = await api.HttpGetEvent(id);
             bool isPlayer = false;
             string username = ((UserViewModel)Session["UserViewModel"]).UserName;
@@ -119,6 +128,9 @@ namespace SportyWebApp.Controllers
         // GET: Event/Create
         public async Task<ActionResult> Create()
         {
+            UserViewModel userViewModel = (UserViewModel)Session["UserViewModel"];
+            if (userViewModel == null) return RedirectToAction("Login", "User");
+
             List<SportViewModel> lst = await api.HttpGetAllSports();
             EventCreateModel model = new EventCreateModel();
             model.lstSports = lst;
@@ -130,6 +142,9 @@ namespace SportyWebApp.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(EventCreateModel model)
         {
+            UserViewModel userViewModel = (UserViewModel)Session["UserViewModel"];
+            if (userViewModel == null) return RedirectToAction("Login", "User");
+
             int hours = -1, minutes = -1;
             string[] time = model.Time.Split(':');
             if (!time[0].Equals("0") && !time[0].Equals("00"))
