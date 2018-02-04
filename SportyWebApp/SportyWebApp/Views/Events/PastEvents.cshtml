@@ -13,8 +13,6 @@
         <h3 id="homeTitle">PROŠLI DOGAĐAJI:</h3>
         @foreach (EventListModel e in ViewBag.PastEvents)
         {
-
-            ViewBag.City = Model.CityName;
             @Html.Partial("_Event", e)
         }
     </div>

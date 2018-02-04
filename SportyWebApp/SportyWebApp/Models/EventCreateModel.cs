@@ -13,6 +13,7 @@ namespace SportyWebApp.Models
         public int SportId { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Datum")]
+        [Required(ErrorMessage = "Odaberite datum")]
         public DateTime Date { get; set; }
         [Display(Name = "Vrijeme")]
         public string Time { get; set; }

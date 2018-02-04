@@ -1,0 +1,56 @@
+﻿@model SportyWebApp.Models.Subscription
+@using SportyWebApp.Models
+
+@{
+    ViewBag.Title = "Create";
+    ViewBag.MainTitle = "Pretplate";
+}
+
+<link href="~/Content/register.css" rel="stylesheet" />
+
+<div style="float:left; margin-right: 150px; ">
+    <label class="formLabels" style="display:inline-block; width: 150px;">Moje pretplate:</label>
+    <br />
+    @using (Html.BeginForm("GetSubscriptionEvents", "Subscription"))
+    {
+        @Html.DropDownList("SubId", new SelectList(ViewBag.lstSubscriptions, "Id", "Name"), new { @class = "reg-input fix" })
+        <input type="submit" value="Prikaži" class="reg-btn" />
+    }
+</div>
+
+<div style="float:left; margin-bottom: 30px;">
+    @using (Html.BeginForm("Create", "Subscription"))
+    {
+        @Html.AntiForgeryToken()
+        <fieldset style="border: solid 2px #0667d0; display:inline-block; padding:10px;">
+            <legend class="formLabels" style="width:175px;">Nova pretplata:</legend>
+            <div class="">
+                <label class="formLabels sub">Naziv:</label>
+                <input type="text" class="reg-input" name="Name">
+            </div>
+            <div class="">
+                <label class="formLabels sub">Sport:</label>
+                @Html.DropDownListFor(m => m.SportId, new SelectList(ViewBag.lstSports, "Id", "Name"), new { @class = "reg-input fix" })
+            </div>
+            <div class="">
+                <label class="formLabels sub">Grad:</label>
+                <input type="text" class="reg-input" name="CityName">
+            </div>
+            <input style="float: right;" type="submit" value="Pretplati me" class="reg-btn" />
+            <div style="clear:right; width:300px;">
+                @ViewBag.error
+            </div>
+        </fieldset>
+
+    }
+</div>
+<div style="clear:both;">
+    @if (ViewBag.lstEvents != null)
+    {
+        <hr />
+        foreach (EventListModel e in ViewBag.lstEvents)
+        {
+            @Html.Partial("_Event", e)
+        }
+    }
+</div>
